@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400|Poppins:400');
+
+html {font-size: 18px;}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    line-height: 1.45;
+    color: #333;
+}
+
+p {margin-bottom: 1.25em;}
+
+h1, h2, h3, h4, h5 {
+    margin: 2rem 0 0.25rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    line-height: 1.15;
+}
+
+.white-color {
+    color: white;
+}
+
+h1 {
+    margin-top: 0;
+    font-size: 2.488em;
+}
+
+h2 {font-size: 2.074em; text-align: center;}
+
+h3 {font-size: 1.728em; text-align: center;}
+
+h4 {font-size: 1.44em; text-align: center; padding-bottom: 1%;}
+
+h5 {font-size: 1.2em; text-align: center;}
+
+small, .text_small {font-size: 0.833em;} 
+
+#continue-button {
+    min-width: 24px;
+    min-height: 24px;
+    width: 10%;
+}
+
+#main {
+    min-height: 100%;
+    min-width: 100%;
+    background: url("../assets/img/in_progress_image.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#main2 {
+    padding-top: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
