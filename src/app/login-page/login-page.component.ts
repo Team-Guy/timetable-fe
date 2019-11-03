@@ -11,7 +11,7 @@ export class LoginPageComponent implements OnInit {
 
   }
   ngAfterViewInit(){
-    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#39B2DF';
+    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#143C55';
  }
 
   ngOnInit() {
