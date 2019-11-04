@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400|Poppins:400');
+
+div {
+    background-color: #ACDED5;
+}
+
+html {font-size: 18px;}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    line-height: 1.45;
+    color: #333;
+}
+
+p {margin-bottom: 1.25em;}
+
+h1, h2, h3, h4, h5 {
+    margin: 2rem 0 0.25rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    line-height: 1.15;
+}
+
+.white-color {
+    color: white;
+}
+
+h1 {
+    margin-top: 0;
+    font-size: 2.488em;
+}
+
+h2 {font-size: 2.074em; text-align: left; align-self: auto;}
+
+h3 {font-size: 1.728em; text-align: left;}
+
+h4 {font-size: 1.44em; text-align: left; padding-bottom: 1%;}
+
+h5 {font-size: 1.2em; text-align: center;}
+
+small, .text_small {font-size: 0.833em;} 
+
+
+.white-color {
+    color: white;
+}
+
+.mat-slide-toggle {
+    margin-left: 5px;
+}
+
+/deep/ .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+    background-color: #767E87;
+}
+
+/deep/ .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+    background-color: #767E87;
+}
+
+button {
+    width: 100px;
+    min-width: 24px;
+}
+
+button:nth-of-type(1) {
+    background-color: #47525E;
+}
+
+button:nth-of-type(2) {
+    background-color: #ACDED5;
+    color: #47525E;
+    margin-left: 20px;
+}
+
+ul {
+    list-style: none;
+    padding-left: 5px;
+}
+
+li {
+    
+}
+
+#preferences {
+    /* float: left; */
+    max-width: 45%;
+}
+
+#main {
+    display: flex;
+    flex-direction: column;
+    max-width: 85%;
+    margin: auto;
+}
+
+/*#imageDiv {
+   position: absolute;
+   margin-left: 39%;
+   margin-top: -5%;
+}*/
+
+#imageDiv {
+    margin-top: -5%;
+    text-align: right;
+}
+
+.inline {
+    display: inline-block;
+}
+
+#btnDiv {
+    margin-top: 1%;
+}
+
+.flexer {
+    display: flex;
+}

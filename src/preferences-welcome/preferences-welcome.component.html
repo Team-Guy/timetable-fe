@@ -1,0 +1,24 @@
+<div id="wrapper">
+  <div id="main">
+    <h2 class="white-color">{{dearMessage}}</h2>
+    <h3 class="white-color">{{mainMessage}}</h3>
+    <div id="btnDiv">
+    <button mat-flat-button color="primary">Read more</button>
+    <button mat-flat-button>Skip</button>
+    <div class="flexer">
+      <div id="preferences">
+        <h4>{{matterMessage}}</h4>
+        <ul>
+            <li *ngFor="let item of preferences;">
+              <div id="itemPreference">
+              <h5 class="white-color inline">{{item}}</h5>
+              <mat-slide-toggle class="inline"></mat-slide-toggle>
+              </div>
+            </li>
+        </ul>
+      </div>
+      <div id="imageDiv">
+        <img src="../assets/img/preferences_photo.jpg">
+      </div>
+  </div>
+</div>
