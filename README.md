@@ -10,7 +10,7 @@ In order to locally run the application make sure you have installed the follwoi
   - [Angular Material](https://material.angular.io/guide/getting-started)
     - Select the following:
     ```
-    ? Deep Purple/Amber 
+    ? Indigo/Pink 
     ? Set up HammerJS for gesture recognition? Yes
     ? Set up browser animations for Angular Material? Yes
     ```
