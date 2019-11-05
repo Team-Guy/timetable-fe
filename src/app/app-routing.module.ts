@@ -22,7 +22,9 @@ const appRoutes: Routes = [
     RouterModule
   ]
 })
+
 export class AppRoutingModule {
   constructor(private router: Router){}
  }
+
 export const routingComponents = [LoginPageComponent]
