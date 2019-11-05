@@ -4,6 +4,17 @@ As a student @ubb you want to have a beautiful, simple way to view your schedule
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.9.
 
+## Installation 
+
+In order to locally run the application make sure you have installed the follwoing dependencies:
+  - [Angular Material](https://material.angular.io/guide/getting-started)
+    - Select the following:
+    ```
+    ? Indigo/Pink 
+    ? Set up HammerJS for gesture recognition? Yes
+    ? Set up browser animations for Angular Material? Yes
+    ```
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

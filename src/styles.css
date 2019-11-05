@@ -1,4 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+/* Coolors Exported Palette - coolors.co/edeec9-133c55-added6-dd2d4a-91e5f6 */
 
+/* RGB 
+primary
+color2: rgba(19, 60, 85, 1); 133C55
+color3: rgba(173, 222, 214, 1); ADDED6
+
+secondary
+color1: rgba(237, 238, 201, 1); EDEEC9
+color4: rgba(221, 45, 74, 1); DD2D4A
+color5: rgba(145, 229, 246, 1); 91E5F6
+*/
+
+/* General CSS rules. */
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
