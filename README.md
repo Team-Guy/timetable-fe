@@ -8,6 +8,12 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 In order to locally run the application make sure you have installed the follwoing dependencies:
   - [Angular Material](https://material.angular.io/guide/getting-started)
+    - Select the following:
+    ```
+    ? Deep Purple/Amber 
+    ? Set up HammerJS for gesture recognition? Yes
+    ? Set up browser animations for Angular Material? Yes
+    ```
 
 ## Development server
 
