@@ -28,8 +28,4 @@ export class AppRoutingModule {
   constructor(private router: Router){}
  }
 
-<<<<<<< HEAD
-export const routingComponents = [LoginPageComponent]
-=======
 export const routingComponents = [LoginPageComponent, SelectGroupPageComponent]
->>>>>>> 77982256f602551e209f7ea2dcee160d189a1214
