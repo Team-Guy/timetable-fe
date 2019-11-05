@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TimetableInProgressComponent implements OnInit {
   inProgressText = 'We are working on your timetable...';
-  doneText = 'Your timetable is ready';
+  doneText = 'Your timetable is ready.';
   showDoneMessage = false;
   showContinueButton = false;
   constructor() { }

@@ -31,22 +31,26 @@ h2 {font-size: 2.074em; text-align: center;}
 
 h3 {font-size: 1.728em; text-align: center;}
 
-h4 {font-size: 1.44em; text-align: center; padding-bottom: 1%;}
+h4 {font-size: 1.44em; text-align: center; margin-top: 15px;}
 
 h5 {font-size: 1.2em; text-align: center;}
 
 small, .text_small {font-size: 0.833em;} 
 
 #continue-button {
+    background-color: #47525E;
     min-width: 24px;
     min-height: 24px;
-    width: 10%;
+    width: 178px;
+    height: 48px;
+    margin-top: 40px;
+    font-family: 'Montserrat';
 }
 
 #main {
     min-height: 100%;
     min-width: 100%;
-    background: url("../assets/img/in_progress_image.jpg") no-repeat center center fixed;
+    background-color: #ACDED5;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -54,9 +58,23 @@ small, .text_small {font-size: 0.833em;}
 }
 
 #main2 {
-    padding-top: 10%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    height: 300px;
+}
+
+.grey-color {
+    color: #47525E;
+}
+
+img {
+    width: 800px;
+    height: 400px;
+}
+
+#imgDiv {
+    margin-top: 50px;
+    text-align: center;
 }
