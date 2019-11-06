@@ -11,7 +11,7 @@ export class PreferencesWelcomeComponent implements OnInit {
   mainMessage = `We do really care about your experience at Babes-Bolyai University. By letting us know your preferences, 
                 we can put our best algorithms to work on a schedule perfectly fitted to your needs.`
   matterMessage = `Tell us what really matters to you. You can change the preferenes whenever you decide from your 
-                profile settings`
+                profile settings.`
   preferences = ["Not before 10am", "No break between activities"]
 
   constructor() { 

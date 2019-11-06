@@ -1,18 +1,19 @@
 <div id="wrapper">
   <div id="main">
-    <h2 class="white-color">{{dearMessage}}</h2>
-    <h3 class="white-color">{{mainMessage}}</h3>
+    <h2 id="dearHeader" class="grey-color">{{dearMessage}}</h2>
+    <h3 class="grey-color">{{mainMessage}}</h3>
     <div id="btnDiv">
-    <button mat-flat-button color="primary">Read more</button>
-    <button mat-flat-button>Skip</button>
-    <div class="flexer">
+      <button mat-flat-button color="primary">Read more</button>
+      <button mat-flat-button>Skip</button>
+    </div>
+    <div class="flexer padded">
       <div id="preferences">
-        <h4>{{matterMessage}}</h4>
+        <h4 class="grey-color">{{matterMessage}}</h4>
         <ul>
             <li *ngFor="let item of preferences;">
               <div id="itemPreference">
-              <h5 class="white-color inline">{{item}}</h5>
-              <mat-slide-toggle class="inline"></mat-slide-toggle>
+                <mat-slide-toggle class="inline"></mat-slide-toggle>
+                <h4 class="grey-color inline">{{item}}</h4>
               </div>
             </li>
         </ul>
@@ -20,5 +21,6 @@
       <div id="imageDiv">
         <img src="../assets/img/preferences_photo.jpg">
       </div>
+    </div>
   </div>
 </div>
