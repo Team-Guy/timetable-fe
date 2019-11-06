@@ -9,12 +9,22 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule,MatInputModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
 
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { environment } from '../environments/environment';
+
+import { AngularFireAuth } from '@angular/fire/auth';
+
 @NgModule({
   declarations: [
     AppComponent,
     routingComponents
   ],
   imports: [
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
+    AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
