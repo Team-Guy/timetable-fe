@@ -1,49 +1,54 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400|Poppins:400');
 
-html {font-size: 18px;}
-
-body {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 400;
-    line-height: 1.45;
-    color: #333;
-}
-
-#select-div{
-    margin-left: 38%;
-    max-width: 30%;
-    margin-top: 4%;
-    display: flex;
-}
+div {width: 100vw;}
 
 .textbox-form{
-    margin-right: 5px;
-    background-color: white;
-    border-radius: 4px;
-    box-shadow: 2px 5px 26px -10px rgba(0,0,0,0.75);
+    z-index: 1;
 }
 
-.button-select {
-    width: 150px;
-    height: 65px;
-    background-color: rgb(71, 82, 94);
-    font-family: 'Montserrat';
-    color: white;
+.select-group {
+    margin-top: 2rem;
+}
+
+.button-select{
+    margin: 0.59rem 0 0 0.5rem;
+    width: auto;
+    height: 43px;
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: 1px solid;
+}
+
+:host /deep/ .mat-form-field-label{
+    font-size: 15px;
+    font-weight: 500;
+    color: black;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+#student-image{
+    position: fixed;
+    bottom: 0.6rem;
+    width: 745px;
 }
 
 #background {
     position: fixed;
-    bottom: 0px;
-    left: 0px;
+    bottom: 0rem;
     width: 100%;
-    height: 150px;
+    height: 4rem;
     background-color: rgb(19, 60, 85);
     z-index: 1;
 }
 
-.fix{
-    position: fixed;
-    bottom: 105px;
-    max-width: 40%;
-    left: 30%;
+@media only screen and (max-width: 400px) {
+    #student-image{
+        bottom: 0rem;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    #student-image{
+        bottom: -2.9rem;
+    }
 }

@@ -32,6 +32,10 @@ html {font-size: 18px;}
     align-items: center;
 }
 
+.flex-vertical-center-row {
+    justify-content: center;
+}
+
 .flex-horizontal-center {
     justify-content: center;
 }
