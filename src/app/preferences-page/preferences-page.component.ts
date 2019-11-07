@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-preferences-welcome',
-  templateUrl: './preferences-welcome.component.html',
-  styleUrls: ['./preferences-welcome.component.css']
+  selector: 'app-preferences-page',
+  templateUrl: './preferences-page.component.html',
+  styleUrls: ['./preferences-page.component.css']
 })
-export class PreferencesWelcomeComponent implements OnInit {
+export class PreferencesPageComponent implements OnInit {
+
   name = 'Alexandra';
   dearMessage = `Dear ${this.name}, `;
   mainMessage = `We do really care about your experience at Babes-Bolyai University. By letting us know your preferences, 
@@ -14,12 +15,9 @@ export class PreferencesWelcomeComponent implements OnInit {
                 profile settings.`
   preferences = ["Not before 10am", "No break between activities"]
 
-  constructor() { 
-    
-  }
+  constructor() { }
 
   ngOnInit() {
-  
   }
 
 }

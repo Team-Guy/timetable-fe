@@ -4,13 +4,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { Router } from '@angular/router';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { SelectGroupPageComponent } from './select-group-page/select-group-page.component';
-import { PreferencesWelcomeComponent } from 'src/preferences-welcome/preferences-welcome.component';
+import { PreferencesPageComponent } from './preferences-page/preferences-page.component';
 
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginPageComponent},
   {path: 'selectgroup', component: SelectGroupPageComponent},
-  {path: 'preferencesWelcome', component: PreferencesWelcomeComponent},
+  {path: 'preferences', component: PreferencesPageComponent},
   {path: '', redirectTo: '/login', pathMatch: 'full'}
 ]
 
@@ -31,4 +31,4 @@ export class AppRoutingModule {
   constructor(private router: Router){}
  }
 
-export const routingComponents = [LoginPageComponent, SelectGroupPageComponent, PreferencesWelcomeComponent]
+export const routingComponents = [LoginPageComponent, SelectGroupPageComponent, PreferencesPageComponent]

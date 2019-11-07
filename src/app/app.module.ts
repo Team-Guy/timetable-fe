@@ -18,7 +18,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    routingComponents
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -33,8 +34,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatSlideToggleModule,
-    routingComponents
+    MatSlideToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]
