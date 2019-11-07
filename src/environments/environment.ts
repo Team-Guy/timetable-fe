@@ -3,8 +3,20 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase: {
+    apiKey: "AIzaSyDORlT-_vQLoNJ4lENxuGtvD8LzmO1tV8w",
+    authDomain: "ubb-timetable.firebaseapp.com",
+    databaseURL: "https://ubb-timetable.firebaseio.com",
+    projectId: "ubb-timetable",
+    storageBucket: "ubb-timetable.appspot.com",
+    messagingSenderId: "324198098302",
+    appId: "1:324198098302:web:05feee7f76d7a330dd3f2f",
+    measurementId: "G-N43Y8RD7RP"
+  }
 };
+
+
 
 /*
  * For easier debugging in development mode, you can import the following file
