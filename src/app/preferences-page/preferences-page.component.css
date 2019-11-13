@@ -107,8 +107,8 @@ ul {
     margin: auto;
 }
 
-#imageDiv {
-
+img {
+    max-width: 100%;
 }
 
 .inline {
