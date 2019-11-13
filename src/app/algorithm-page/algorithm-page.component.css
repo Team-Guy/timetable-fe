@@ -1,0 +1,31 @@
+#main {
+    background-color: #B3E0FF;
+}
+
+#content {
+    width: 60%;
+    margin: 0 auto;
+}
+
+img {
+    max-width: 100%;
+}
+
+button:nth-of-type(1) {
+    background-color: #47525E;
+    color: white;
+}
+
+button {
+    width: 160px;
+    height: 50px;
+    min-width: 24px;
+}
+
+button + button {
+    margin-left: 10px;
+}
+
+.flex-end {
+    justify-content: flex-end;
+}

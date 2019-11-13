@@ -4,10 +4,12 @@ import { RouterModule, Routes } from '@angular/router';
 import {Router} from '@angular/router';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { SelectGroupPageComponent } from './select-group-page/select-group-page.component';
+import { AlgorithmPageComponent } from './algorithm-page/algorithm-page.component';
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginPageComponent},
   {path: 'selectgroup', component: SelectGroupPageComponent},
+  {path: 'algorithm', component: AlgorithmPageComponent},
   {path: '', redirectTo: '/login', pathMatch: 'full'}
 ]
 
@@ -28,4 +30,4 @@ export class AppRoutingModule {
   constructor(private router: Router){}
  }
 
-export const routingComponents = [LoginPageComponent, SelectGroupPageComponent]
+export const routingComponents = [LoginPageComponent, SelectGroupPageComponent, AlgorithmPageComponent]

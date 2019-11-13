@@ -15,11 +15,13 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AlgorithmPageComponent } from './algorithm-page/algorithm-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    routingComponents
+    routingComponents,
+    AlgorithmPageComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
