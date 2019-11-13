@@ -1,0 +1,10 @@
+<div id="main">
+    <div id="main2">
+        <h4 class="grey-color">{{inProgressText}}</h4>
+        <h4 *ngIf="showDoneMessage" class="grey-color" >{{doneText}}</h4>
+        <button *ngIf="showContinueButton" mat-flat-button color="primary" id="continue-button">Continue</button>
+    </div>
+    <div id="imgDiv">
+        <img src="../assets/img/in_progress_image.png">
+    </div>
+</div>

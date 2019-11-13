@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { TimetableInProgressComponent } from '../timetable-in-progress/timetable-in-progress.component';
+import { TimetableInProgressComponent } from './timetable-in-progress/timetable-in-progress.component';
 import { Router } from '@angular/router';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { SelectGroupPageComponent } from './select-group-page/select-group-page.component';
