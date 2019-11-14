@@ -1,9 +1,15 @@
+body {
+    height: 100%;
+}
+
 #main {
     background-color: #B3E0FF;
+    min-height: 700px;
 }
 
 #content {
-    width: 60%;
+    width: 70%;
+    height: 100%;
     margin: 0 auto;
 }
 
