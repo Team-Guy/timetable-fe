@@ -20,8 +20,7 @@ import { AlgorithmPageComponent } from './algorithm-page/algorithm-page.componen
 @NgModule({
   declarations: [
     AppComponent,
-    routingComponents,
-    AlgorithmPageComponent
+    routingComponents
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
