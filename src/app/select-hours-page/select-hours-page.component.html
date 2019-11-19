@@ -1,0 +1,39 @@
+<div id="main">
+  <div id="content">
+    <div class="flex flex-row">
+      <h3>{{message}}</h3>
+    </div>
+    <ul>
+      <li *ngFor="let day of days;">
+        <div class="flex flex-row">
+          <h5>{{day}}</h5>
+          
+          <mat-form-field>
+            <input matInput #startHour maxlength="2" placeholder="H" value="08">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput #startMinute maxlength="2" placeholder="M" value="00">
+          </mat-form-field>
+
+          <div class="to">
+            <h6>To: </h6>
+          </div>
+          
+          <div class="endTime">
+            <mat-form-field>
+                <input matInput #endHour maxlength="2" placeholder="H" value="16">
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput #endMinute maxlength="2" placeholder="M" value="00">
+            </mat-form-field>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <div class="flex flex-end">
+        <button mat-stroked-button>Run</button>
+    </div>
+  </div>
+</div>

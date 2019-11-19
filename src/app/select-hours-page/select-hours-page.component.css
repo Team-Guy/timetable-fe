@@ -1,0 +1,42 @@
+#main {
+    background-color: #B3E0FF;
+    min-height: 700px;
+}
+
+#content {
+    width: 90%;
+    margin: 0 auto;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+mat-form-field {
+    width: 30px;
+    padding-left: 10px;
+    margin: 1.8rem 0 1rem;
+}
+
+h4 {
+    padding-right: 20px;
+}
+
+.to {
+    padding-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+button {
+    width: 160px;
+    height: 50px;
+    min-width: 24px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+}
+
+.flex-end {
+    justify-content: flex-end;
+} 
