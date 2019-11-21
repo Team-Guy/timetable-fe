@@ -2,13 +2,9 @@
 
 div {width: 100vw;}
 
-.textbox-form{
-    z-index: 1;
-}
+.textbox-form{z-index: 1;}
 
-.select-group {
-    margin-top: 2rem;
-}
+.select-group {margin-top: 2rem;}
 
 .button-select{
     margin: 0.59rem 0 0 0.5rem;
@@ -29,6 +25,9 @@ div {width: 100vw;}
     position: fixed;
     bottom: 0.6rem;
     width: 745px;
+    transition-property: all;
+    transition-duration: .5s;
+    transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
 }
 
 #background {
@@ -38,16 +37,35 @@ div {width: 100vw;}
     height: 4rem;
     background-color: rgb(19, 60, 85);
     z-index: 1;
+    transition-property: all;
+    transition-duration: .5s;
+    transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
 }
 
 @media only screen and (max-width: 400px) {
-    #student-image{
-        bottom: 0rem;
-    }
+    #student-image{bottom: 0rem;}
 }
 
 @media only screen and (max-width: 320px) {
-    #student-image{
-        bottom: -2.9rem;
-    }
+    #student-image{bottom: -2.9rem;}
+}
+
+@media only screen and (max-height: 510px) {
+    #student-image{bottom: -7rem;}
+    #background {bottom: -1rem;}
+}
+
+@media only screen and (max-height: 410px) {
+    #student-image{bottom: -14rem;}
+    #background {bottom: -2rem;}
+}
+
+@media only screen and (max-height: 330px) {
+    #student-image{bottom: -18rem;}
+    #background {bottom: -2rem;}
+}
+
+@media only screen and (max-height: 260px) {
+    #student-image{bottom: -27rem;}
+    #background {bottom: -2rem;}
 }
