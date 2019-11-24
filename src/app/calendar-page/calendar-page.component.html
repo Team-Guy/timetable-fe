@@ -5,23 +5,34 @@
     </div>
     <button mat-flat-button color="warn" id="btnGenerate">Generate schedule</button>
   </div>
-  <hr class="hline">
-  <div class="sidenav">
-    <div class="dropdown-btn">Activities filter
+  <div class="flex flex-row flex-horizontal-center menu-and-calendar">
+    <div class="scroll-container">
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              My calendars
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="flex flex-row flex-horizontal-center sub-sidebar">
+            <div class="filter">University</div><mat-checkbox></mat-checkbox>
+          </div>
+          <div class="flex flex-row flex-horizontal-center sub-sidebar">
+            <div class="filter">Activities</div><mat-checkbox></mat-checkbox>
+          </div>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Priorities
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <p>I'm visible because I am open</p>
+        </mat-expansion-panel>
+      </mat-accordion>
     </div>
-    <div class="dropdown-container">
-      <mat-radio-group class="flex flex-col container">
-        <mat-radio-button value="1">Univerisity</mat-radio-button>
-        <mat-radio-button value="2">Activities</mat-radio-button>
-        <mat-radio-button value="3">All</mat-radio-button>
-      </mat-radio-group>
-    </div>
-    <div class="dropdown-btn">Hour filter 
-    </div>
-    <div class="dropdown-container">
-      <a>8pm</a>
-      <a>9pm</a>
-      <a>10pm</a>
+    <div id="calendarPlaceHolder">
+      Aista-i calendaru'
     </div>
   </div>
 </div>
