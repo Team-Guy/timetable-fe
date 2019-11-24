@@ -1,0 +1,63 @@
+<div class="flex flex-col">
+  <div class="flex flex-row flex-horizontal-center">
+    <h5 style="margin-bottom: 0;">Everybody is different. Customize your data.</h5>
+  </div>
+  <div class="flex flex-row flex-horizontal-center">
+    <img id="profile-image" src="../../assets/img/profile.gif"/>
+  </div>
+  <div class="flex flex-row flex-horizontal-center">
+    <div class="personal-info">
+      <form class="flex flex-col">
+        <mat-form-field>
+          <input matInput placeholder="First name">
+        </mat-form-field>
+      
+        <mat-form-field>
+          <input matInput placeholder="Last name">
+        </mat-form-field>
+
+        <mat-form-field class="text-full-width">
+          <input type="text" placeholder="Group" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </form>
+    </div>
+    <div class="flex flex-col optional-classes">
+      <form class="flex flex-col">
+        <mat-form-field class="text-full-width">
+          <input type="text" placeholder="Optional 1st sem" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      
+        <mat-form-field class="text-full-width">
+          <input type="text" placeholder="Optional 2nd sem" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      
+        <mat-form-field class="text-full-width">
+          <input type="text" placeholder="Optional 3rd sem" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </form>
+    </div>
+  </div>
+  <div class="flex flex-row">
+    Butoanele
+  </div>
+</div>
