@@ -6,7 +6,7 @@ import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule,MatInputModule } from '@angular/material';
+import { MatFormFieldModule,MatInputModule,MatMenuModule,MatToolbarModule,MatExpansionModule,MatCheckboxModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
 
 import { AngularFireModule } from '@angular/fire';
@@ -15,11 +15,27 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 
 import { AngularFireAuth } from '@angular/fire/auth';
+import { CalendarPageComponent } from './calendar-page/calendar-page.component';
+import { TreeViewModule } from '@syncfusion/ej2-angular-navigations';
+import { DropDownListAllModule, MultiSelectAllModule } from '@syncfusion/ej2-angular-dropdowns';
+import { MaskedTextBoxModule, UploaderAllModule } from '@syncfusion/ej2-angular-inputs';
+import { ToolbarAllModule, ContextMenuAllModule } from '@syncfusion/ej2-angular-navigations';
+import { ButtonAllModule } from '@syncfusion/ej2-angular-buttons';
+import { CheckBoxAllModule } from '@syncfusion/ej2-angular-buttons';
+import { DatePickerAllModule, TimePickerAllModule, DateTimePickerAllModule } from '@syncfusion/ej2-angular-calendars';
+import { NumericTextBoxAllModule } from '@syncfusion/ej2-angular-inputs';
+import { ScheduleAllModule, RecurrenceEditorAllModule } from '@syncfusion/ej2-angular-schedule';
+import { HttpModule } from '@angular/http';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    routingComponents
+    routingComponents,
+    CalendarPageComponent,
+    NavbarComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -33,9 +49,32 @@ import { AngularFireAuth } from '@angular/fire/auth';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatExpansionModule,
+    MatCheckboxModule,
+    RouterModule,
+
+    CommonModule, 
+    HttpModule, 
+    ScheduleAllModule, 
+    RecurrenceEditorAllModule,   
+    NumericTextBoxAllModule, 
+    DatePickerAllModule, 
+    TimePickerAllModule, 
+    DateTimePickerAllModule, 
+    CheckBoxAllModule, 
+    ToolbarAllModule,   
+    DropDownListAllModule, 
+    ContextMenuAllModule, 
+    MaskedTextBoxModule, 
+    UploaderAllModule, 
+    MultiSelectAllModule, 
+    TreeViewModule, 
+    ButtonAllModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, NavbarComponent]
 })
 export class AppModule { }

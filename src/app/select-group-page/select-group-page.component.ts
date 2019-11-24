@@ -25,10 +25,6 @@ export class SelectGroupPageComponent implements OnInit {
     );
   }
 
-  ngAfterViewInit(){
-    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#ADDED6';
-  }
-
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
