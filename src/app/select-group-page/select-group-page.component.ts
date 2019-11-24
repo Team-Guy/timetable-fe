@@ -26,7 +26,7 @@ export class SelectGroupPageComponent implements OnInit {
   }
 
   ngAfterViewInit(){
-    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#ADDED6';
+    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#80CBC4';
   }
 
   private _filter(value: string): string[] {
