@@ -1,6 +1,6 @@
 <div class="flex flex-col">
   <div class="flex flex-row flex-horizontal-center">
-    <h5 style="margin-bottom: 0;">Everybody is different. Customize your data.</h5>
+    <h5 style="margin-bottom: 0; color: rgb(88, 88, 88)">Everybody is different. Customize your data.</h5>
   </div>
   <div class="flex flex-row flex-horizontal-center">
     <img id="profile-image" src="../../assets/img/profile.gif"/>
@@ -56,8 +56,39 @@
         </mat-form-field>
       </form>
     </div>
+    <div class="flex flex-col optional-classes">
+      <form class="flex flex-col">
+        <mat-form-field class="text-full-width">
+          <input type="text" placeholder="Optional 4th sem" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      
+        <mat-form-field class="text-full-width">
+          <input type="text" placeholder="Optional 5th sem" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      
+        <mat-form-field class="text-full-width">
+          <input type="text" placeholder="Optional 6th sem" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </form>
+    </div>
   </div>
-  <div class="flex flex-row">
-    Butoanele
+  <div class="flex flex-row flex-horizontal-center butoane">
+    <button mat-flat-button id="btnCommit">Commit</button>
+    <button mat-flat-button id="btnLogout">Log out</button>
   </div>
 </div>

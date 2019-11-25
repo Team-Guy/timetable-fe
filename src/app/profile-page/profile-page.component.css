@@ -7,5 +7,22 @@
 }
 
 .optional-classes{
-    margin: 0 0 0 1rem;
+    margin: 0 1rem 0 1rem;
+}
+
+#btnCommit{
+    background-color: rgb(70, 92, 70);
+    color: white;
+    margin: 0 0.1rem 0 0;
+}
+
+#btnLogout{
+    border: 0.4px solid;
+    border-color: rgb(70, 92, 70);
+    color: rgb(70, 92, 70);
+    margin: 0 0 0 0.1rem;
+}
+
+.butoane{
+    margin-left: 20vw;
 }
