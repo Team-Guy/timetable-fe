@@ -1,0 +1,19 @@
+.spacer {
+    flex: 1 1 auto;
+}
+
+.rounded {
+    border-radius: 50%;
+}
+
+.profile_photo {
+    width: 50px;
+    height: 50px;
+    padding: 0 14px;
+}
+
+button {
+    width: 100px;
+    height: 25px;
+    background-color: #8090A5;
+}
