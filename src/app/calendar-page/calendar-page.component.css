@@ -41,7 +41,14 @@ div {width: 100vw;}
     margin-right: 5rem;
     width: 68rem;
     height: 550px;
-    border-radius: 5px;
+}
+
+.activity-type-radio-button{
+    margin-bottom: 7px;
+}
+
+.group-radio-button {
+    margin-bottom: 7px;
 }
 
 .e-table-container {

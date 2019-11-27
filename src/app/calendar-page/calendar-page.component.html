@@ -1,9 +1,9 @@
 <div id="navyblue">
     <div id="weekNbutton" class="flex flex-row flex-horizontal-center">
       <div id="week">
-        <strong>Odd</strong> week <strong>[7]</strong>
+        week <strong>{{weekNumber}}</strong>
       </div>
-      <button mat-flat-button color="warn" id="btnGenerate">Generate schedule</button>
+      <button mat-flat-button color="warn" id="btnGenerate">Optimize schedule</button>
     </div>
     <div class="flex flex-row flex-horizontal-center menu-and-calendar">
       <div class="scroll-container">
@@ -11,15 +11,18 @@
           <mat-expansion-panel>
             <mat-expansion-panel-header>
               <mat-panel-title>
-                Filter by
+                Group view
               </mat-panel-title>
             </mat-expansion-panel-header>
-            <div class="flex flex-row flex-horizontal-center sub-sidebar">
-              <div class="filter">University</div><mat-checkbox></mat-checkbox>
-            </div>
-            <div class="flex flex-row flex-horizontal-center sub-sidebar">
-              <div class="filter">Activities</div><mat-checkbox></mat-checkbox>
-            </div>
+            <mat-radio-group
+              (change)="radioGroupView()"
+              aria-labelledby="group-radio-group-label"
+              class="group-radio-group"
+              [(ngModel)]="currentActivityType">
+              <mat-radio-button class="group-radio-button" *ngFor="let type of activityTypes" [value]="type">
+                <div>{{type}}</div>
+              </mat-radio-button>
+            </mat-radio-group>
           </mat-expansion-panel>
           <mat-expansion-panel>
             <mat-expansion-panel-header>
@@ -27,24 +30,34 @@
                 View settings
               </mat-panel-title>
             </mat-expansion-panel-header>
-            <div class="flex flex-row flex-horizontal-center sub-sidebar">
-              <div class="filter">Activities</div><mat-checkbox></mat-checkbox>
-            </div>
-            <div class="flex flex-row flex-horizontal-center sub-sidebar">
-              <div class="filter">Day</div><mat-checkbox></mat-checkbox>
-            </div>
-            <div class="flex flex-row flex-horizontal-center sub-sidebar">
-              <div class="filter">Full week</div><mat-checkbox></mat-checkbox>
-            </div>
-            <div class="flex flex-row flex-horizontal-center sub-sidebar">
-              <div class="filter">University week</div><mat-checkbox></mat-checkbox>
-            </div>
-            <div class="flex flex-row flex-horizontal-center sub-sidebar">
-              <div class="filter">Month</div><mat-checkbox></mat-checkbox>
-            </div>
+            <mat-radio-group
+              aria-labelledby="activity-type-radio-group-label"
+              class="activity-type-radio-group"
+              [(ngModel)]="currentView">
+              <mat-radio-button class="activity-type-radio-button" *ngFor="let type of viewTypes" [value]="type.key">
+                <div>{{type.value}}</div>
+              </mat-radio-button>
+            </mat-radio-group>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Export as
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <button mat-flat-button color="primary" (click)="download()">
+              XML
+            </button>
           </mat-expansion-panel>
         </mat-accordion>
       </div>
-      <ejs-schedule style="margin-right: 5rem; border-radius: 5px;" [cssClass]="calendarPlaceHolder" [selectedDate]='selectedDate' [eventSettings]='eventSettings'></ejs-schedule>
+      <ejs-schedule #scheduleObj
+        style="margin-right: 5rem; border-radius: 5px;" 
+        [cssClass]='calendarPlaceHolder'
+        [selectedDate]='selectedDate' 
+        [eventSettings]='eventSettings'
+        [views]='setViews'
+        [(currentView)]="currentView"
+        [showHeaderBar]='showHeaderBar'></ejs-schedule>
     </div>
   </div>

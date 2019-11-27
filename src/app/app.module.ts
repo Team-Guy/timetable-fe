@@ -6,7 +6,7 @@ import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule,MatInputModule,MatMenuModule,MatToolbarModule,MatExpansionModule,MatCheckboxModule } from '@angular/material';
+import { MatFormFieldModule,MatInputModule,MatMenuModule,MatToolbarModule,MatExpansionModule,MatCheckboxModule,MatRadioModule,MatIconModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
 
 import { AngularFireModule } from '@angular/fire';
@@ -29,6 +29,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './navbar/navbar.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     MatAutocompleteModule,
     FormsModule,
@@ -55,6 +57,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     MatExpansionModule,
     MatCheckboxModule,
     RouterModule,
+    MatRadioModule,
+    MatIconModule,
 
     CommonModule, 
     HttpModule, 
