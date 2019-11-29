@@ -6,7 +6,7 @@ import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule,MatInputModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatSelectModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
 
 import { AngularFireModule } from '@angular/fire';
@@ -34,7 +34,8 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

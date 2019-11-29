@@ -29,21 +29,21 @@
     <div class="flex flex-col optional-classes">
       <form class="flex flex-col">
         <mat-form-field class="text-full-width">
-          <input type="text" placeholder="Optional 1st sem" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
-          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <input type="text" placeholder="Optional 1st sem" aria-label="Number" matInput>
+          <mat-select [formControl]="options" multiple>
             <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
               {{option}}
             </mat-option>
-          </mat-autocomplete>
+          </mat-select>
         </mat-form-field>
       
         <mat-form-field class="text-full-width">
-          <input type="text" placeholder="Optional 2nd sem" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
-          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <input type="text" placeholder="Optional 2nd sem" aria-label="Number" matInput>
+          <mat-select [formControl]="options" multiple>
             <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
               {{option}}
             </mat-option>
-          </mat-autocomplete>
+          </mat-select>
         </mat-form-field>
       
         <mat-form-field class="text-full-width">
