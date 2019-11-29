@@ -1,0 +1,81 @@
+:host /deep/ .mat-step-icon-selected{
+    background-color: white;
+    color: black;
+}
+
+:host /deep/ .mat-step-icon-state-edit{
+    background-color: white;
+    color: black;
+}
+
+:host /deep/ .mat-step-label{
+    color: white !important;
+}
+
+:host /deep/ .mat-step-label-active{
+    color: white !important;
+}
+
+:host /deep/ .mat-step-label-selected{
+    color: white !important;
+}
+
+:host /deep/ .mat-form-field-label{
+    color: white !important;
+}
+
+:host /deep/ .mat-form-field-invalid{
+    color: red !important;
+}
+
+:host /deep/ .mat-form-field-underline{
+    background-color: white !important;
+}
+
+.nextBtn{
+    background-color: white;
+    color: black;
+    margin: 0 0.1rem 0 0;
+}
+
+.readMore{
+    border: 0.4px solid;
+    border-color: white;
+    margin: 0 0 0 0.1rem;
+}
+
+.butoane{
+    margin-left: 40vw;
+}
+
+.param{
+    margin: 0.5rem 0rem 0 0;
+    max-width: 300px;
+}
+
+.paramLabel{
+    margin: 0.1rem 0 0 0;
+}
+
+.tgl{
+    position: relative;
+    right: -10vw;
+}
+
+#main {
+    min-height: 500px;
+}
+
+#content {
+    width: 70%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+img {
+    max-width: 40%;
+}
+
+.laststep{
+    margin: 30vh 0 0 0;
+}

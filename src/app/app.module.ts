@@ -6,7 +6,7 @@ import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule,MatInputModule,MatMenuModule,MatToolbarModule,MatExpansionModule,MatCheckboxModule,MatRadioModule,MatIconModule } from '@angular/material';
+import { MatFormFieldModule,MatInputModule,MatMenuModule,MatToolbarModule,MatExpansionModule,MatCheckboxModule,MatRadioModule,MatIconModule,MatStepperModule,MatSlideToggleModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
 
 import { AngularFireModule } from '@angular/fire';
@@ -36,9 +36,7 @@ import { OptimizationFlowComponent } from './optimization-flow/optimization-flow
   declarations: [
     AppComponent,
     routingComponents,
-    CalendarPageComponent,
-    NavbarComponent,
-    OptimizationFlowComponent
+    NavbarComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -61,6 +59,8 @@ import { OptimizationFlowComponent } from './optimization-flow/optimization-flow
     RouterModule,
     MatRadioModule,
     MatIconModule,
+    MatStepperModule,
+    MatSlideToggleModule,
 
     CommonModule, 
     HttpModule, 

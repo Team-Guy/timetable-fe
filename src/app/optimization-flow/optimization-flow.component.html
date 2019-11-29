@@ -1,3 +1,57 @@
-<p>
-  optimization-flow works!
-</p>
+<div>
+  <mat-horizontal-stepper style="height: 91.5vh; background-color: rgb(19, 60, 85); color: white;" [linear]="true" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Parameters</ng-template>
+        <div class="flex flex-col">
+          <div class="param flex flex-row"><div class="paramLabel">Param1</div><mat-slide-toggle class="tgl"></mat-slide-toggle></div>
+          <div class="param flex flex-row"><div class="paramLabel">Param2</div><mat-slide-toggle class="tgl"></mat-slide-toggle></div>
+          <div class="param flex flex-row"><div class="paramLabel">Param3</div><mat-slide-toggle class="tgl"></mat-slide-toggle></div>
+          <div class="param flex flex-row"><div class="paramLabel">Param4</div><mat-slide-toggle class="tgl"></mat-slide-toggle></div>
+          <div class="param flex flex-row"><div class="paramLabel">Param5</div><mat-slide-toggle class="tgl"></mat-slide-toggle></div>
+        </div>
+        <div class="flex flex-row flex-horizontal-center butoane">
+          <button class="nextBtn" mat-button matStepperNext>Next</button>
+          <button class="readMore" mat-button>Read more</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Algorithm</ng-template>
+        <div id="main">
+            <div id="content">
+              <div class="flex flex-end">
+                <h5 class="connect-header">We are now connecting the dots.</h5>
+              </div>
+              <img src="../assets/img/rocket.jpg">
+            </div>
+          </div>
+          <div class="flex flex-row flex-horizontal-center butoane">
+            <button class="nextBtn" mat-button matStepperNext>Next</button>
+            <button class="readMore" mat-button matStepperPrevious>Abort</button>
+          </div>
+      </form>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Overview</ng-template>
+        
+        <div class="flex flex-row flex-horizontal-center butoane">
+          <button class="nextBtn" mat-button matStepperNext>Next</button>
+          <button class="readMore" mat-button matStepperPrevious>Abort</button>
+        </div>
+      </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Finish</ng-template>
+      <div class="flex flex-col laststep">
+        <div class="flex flex-row flex-horizontal-center">
+          Your schedule is now setting up...
+        </div>
+        <div class="flex flex-row flex-horizontal-center">
+          <button class="nextBtn" mat-button>Read more</button>
+          <button class="readMore" mat-button>Home</button>
+        </div>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>
