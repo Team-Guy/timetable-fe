@@ -30,13 +30,15 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
+import { OptimizationFlowComponent } from './optimization-flow/optimization-flow.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     routingComponents,
     CalendarPageComponent,
-    NavbarComponent
+    NavbarComponent,
+    OptimizationFlowComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
