@@ -1,0 +1,12 @@
+<mat-toolbar class="color-scheme" color="primary">
+  <span>_timetable</span>
+
+  <!-- This fills the remaining space of the current row -->
+  <button style="margin-left: auto" mat-button [matMenuTriggerFor]="menu">
+    User
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>Profile</button>
+    <button mat-menu-item>Read more</button>
+  </mat-menu>
+</mat-toolbar>

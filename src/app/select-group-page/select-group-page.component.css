@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400|Poppins:400');
 
-div {width: 100vw;}
+div {width: 100%;}
 
 .textbox-form{z-index: 1;}
 
