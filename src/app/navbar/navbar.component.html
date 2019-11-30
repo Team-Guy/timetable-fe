@@ -1,12 +1,13 @@
 <mat-toolbar class="color-scheme" color="primary">
-  <span>_timetable</span>
+  <span routerLink="/timetable">_timetable</span>
 
   <!-- This fills the remaining space of the current row -->
-  <button style="margin-left: auto" mat-button [matMenuTriggerFor]="menu">
-    User
+  <button mat-icon-button style="margin-left: auto" mat-button [matMenuTriggerFor]="menu">
+    <img style="height: 35px; width: 35px; border-radius: 20px;"
+    src="https://images.unsplash.com/photo-1499084732479-de2c02d45fcc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80">
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item>Profile</button>
+    <button routerLink="/profile" mat-menu-item>Profile</button>
     <button mat-menu-item>Read more</button>
   </mat-menu>
 </mat-toolbar>

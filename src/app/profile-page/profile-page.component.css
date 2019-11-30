@@ -1,9 +1,12 @@
 #profile-image{
-    width: 450px;
+    width: 650px;
+    height: auto;
+    margin: 0 -10rem 0 1rem;
 }
 
 .personal-info{
-    margin: 0 1rem 0 0;
+    width: 400px;
+    margin: 0 1rem 0 1rem;
 }
 
 .optional-classes{
@@ -23,18 +26,23 @@
     margin: 0 0 0 0.1rem;
 }
 
-.butoane{
-    margin-left: 20vw;
-}
-
 .info{
-    margin: 0 0 1.1rem 0;
+    margin: 0 0 0 0;
 }
 
 .topinfo{
-    margin: 1.05rem 0 1.1rem 0;
+    margin: 1.05rem 0 0 0;
 }
 
 :host /deep/ .mat-form-field-infix{
     border-top: 0 solid !important;
+}
+
+.vertical-stepper {
+    margin-top: 2rem;
+}
+
+.commit-btn {
+    margin-top: 1rem;
+    margin-left: auto;
 }
