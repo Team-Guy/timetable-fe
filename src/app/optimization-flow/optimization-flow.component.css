@@ -70,8 +70,11 @@
 
 img {
     margin: 3rem 1rem 0 0;
-    max-width: 55%;
-    max-height: 250px;
+    display: block;
+    max-width:690px;
+    max-height:260px;
+    width: auto;
+    height: auto;
 }
 
 .laststep{
