@@ -1,0 +1,93 @@
+:host /deep/ .mat-step-icon-selected{
+    background-color: white;
+    color: black;
+}
+
+:host /deep/ .mat-step-icon-state-edit{
+    background-color: white;
+    color: black;
+}
+
+:host /deep/ .mat-step-label{
+    color: black !important;
+}
+
+:host /deep/ .mat-step-label-active{
+    color: black !important;
+}
+
+:host /deep/ .mat-step-label-selected{
+    color: black !important;
+}
+
+:host /deep/ .mat-form-field-label{
+    color: white !important;
+}
+
+:host /deep/ .mat-form-field-invalid{
+    color: red !important;
+}
+
+:host /deep/ .mat-form-field-underline{
+    background-color: white !important;
+}
+
+.nextBtn{
+    background-color: rgb(19, 60, 85);
+    color: white;
+    margin: 0 0.1rem 0 0;
+}
+
+.readMore{
+    border: 0.4px solid;
+    border-color: rgb(19, 60, 85);
+    margin: 0 0 0 0.1rem;
+}
+
+.butoane{
+    margin-left: 40vw;
+}
+
+.param{
+    margin: 0.5rem 0rem 0 0;
+    max-width: 300px;
+}
+
+.paramLabel{
+    margin: 0.1rem 0 0 0;
+}
+
+.tgl{
+    position: relative;
+    right: -10vw;
+}
+
+#content {
+    width: 70%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+img {
+    margin: 3rem 1rem 0 0;
+    display: block;
+    max-width:690px;
+    max-height:260px;
+    width: auto;
+    height: auto;
+}
+
+.laststep{
+    margin: 30vh 0 0 0;
+}
+
+.flow{
+    margin: 0 6rem 0 6rem;
+}
+
+.in-stepper{
+    margin: 0 2rem 0 2rem;
+    min-width: 800px;
+    min-height: 50vh;
+    max-height: 50vh;
+}

@@ -6,7 +6,7 @@ import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule,MatInputModule,MatMenuModule,MatToolbarModule,MatExpansionModule,MatCheckboxModule,MatRadioModule,MatIconModule } from '@angular/material';
+import { MatFormFieldModule,MatInputModule,MatMenuModule,MatToolbarModule,MatExpansionModule,MatCheckboxModule,MatRadioModule,MatIconModule,MatStepperModule,MatSlideToggleModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
 
 import { AngularFireModule } from '@angular/fire';
@@ -30,12 +30,12 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
+import { OptimizationFlowComponent } from './optimization-flow/optimization-flow.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     routingComponents,
-    CalendarPageComponent,
     NavbarComponent
   ],
   imports: [
@@ -59,6 +59,8 @@ import { HttpClientModule } from '@angular/common/http';
     RouterModule,
     MatRadioModule,
     MatIconModule,
+    MatStepperModule,
+    MatSlideToggleModule,
 
     CommonModule, 
     HttpModule, 
