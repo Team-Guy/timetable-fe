@@ -9,15 +9,15 @@
 }
 
 :host /deep/ .mat-step-label{
-    color: white !important;
+    color: black !important;
 }
 
 :host /deep/ .mat-step-label-active{
-    color: white !important;
+    color: black !important;
 }
 
 :host /deep/ .mat-step-label-selected{
-    color: white !important;
+    color: black !important;
 }
 
 :host /deep/ .mat-form-field-label{
@@ -33,14 +33,14 @@
 }
 
 .nextBtn{
-    background-color: white;
-    color: black;
+    background-color: rgb(19, 60, 85);
+    color: white;
     margin: 0 0.1rem 0 0;
 }
 
 .readMore{
     border: 0.4px solid;
-    border-color: white;
+    border-color: rgb(19, 60, 85);
     margin: 0 0 0 0.1rem;
 }
 
@@ -73,9 +73,22 @@
 }
 
 img {
-    max-width: 40%;
+    margin: 3rem 1rem 0 0;
+    max-width: 70%;
+    max-height: 350px;
 }
 
 .laststep{
     margin: 30vh 0 0 0;
+}
+
+.flow{
+    margin: 0 6rem 0 6rem;
+}
+
+.in-stepper{
+    margin: 0 2rem 0 2rem;
+    min-width: 800px;
+    min-height: 500px;
+    max-height: 500px;
 }
