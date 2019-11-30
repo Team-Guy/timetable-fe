@@ -62,10 +62,6 @@
     right: -10vw;
 }
 
-#main {
-    min-height: 500px;
-}
-
 #content {
     width: 70%;
     height: 100%;
@@ -74,8 +70,8 @@
 
 img {
     margin: 3rem 1rem 0 0;
-    max-width: 70%;
-    max-height: 350px;
+    max-width: 55%;
+    max-height: 250px;
 }
 
 .laststep{
@@ -89,6 +85,6 @@ img {
 .in-stepper{
     margin: 0 2rem 0 2rem;
     min-width: 800px;
-    min-height: 500px;
-    max-height: 500px;
+    min-height: 50vh;
+    max-height: 50vh;
 }
