@@ -12,6 +12,8 @@ export class ProfilePageComponent implements OnInit {
 
   myControl = new FormControl();
   options: string[] = ['931/1', '931/2', '932/1','932/2', '933/1', '933/2','226/1', '226/2', '227/1'];
+  optionals = new FormControl();
+  optionalList: string[] = ['mate', 'ceva', 'altcv'];
   filteredOptions: Observable<string[]>;
 
   constructor() { }
