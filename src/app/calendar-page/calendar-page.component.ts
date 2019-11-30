@@ -12,6 +12,7 @@ import { EventSettingsModel,
   DragAndDropService, 
   View } from '@syncfusion/ej2-angular-schedule';
 import { scheduleData } from './data';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-calendar-page',
@@ -22,8 +23,8 @@ import { scheduleData } from './data';
 export class CalendarPageComponent implements OnInit {
   @ViewChild('scheduleObj')
   public scheduleObj: ScheduleComponent;
+  public selectedDate: Date = new Date();
   public weekNumber = this.computeWeek();
-  public selectedDate: Date = new Date(2019, 11, 28);
   public eventSettings: EventSettingsModel = { dataSource: <Object[]>extend([], scheduleData.University, null, true) };
   public currentView: View = "Day";
   public currentActivityType: String = "University";
@@ -39,7 +40,12 @@ export class CalendarPageComponent implements OnInit {
   public navigationLeftArrow: HTMLElement;
   public showHeaderBar: Boolean = false;
 
-  constructor() { 
+  constructor(private http: HttpClient) { 
+    http.get('http://timetable.epixmobile.ro/schedule/raul').subscribe(
+      (response) => {
+        console.log(response);
+      }
+    )
   }
 
   ngOnInit() {
@@ -65,9 +71,9 @@ export class CalendarPageComponent implements OnInit {
   }
 
   public computeWeek() {
-    var startDate = new Date(2019, 9, 30);
-    var today = new Date(2019, 11, 28);
-    var diff = Math.abs(today.getTime() - startDate.getTime());
+    // First month is determined by 0.
+    var startDate = new Date(2019, 8, 30);
+    var diff = Math.abs(this.selectedDate.getTime() - startDate.getTime());
     var diffDays = Math.ceil(diff / (1000 * 3600 * 24)); 
     console.log(diffDays);
     return Math.ceil(diffDays / 7);

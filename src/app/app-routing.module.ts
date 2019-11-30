@@ -34,4 +34,10 @@ export class AppRoutingModule {
   constructor(private router: Router){}
  }
 
-export const routingComponents = [LoginPageComponent, SelectGroupPageComponent, CalendarPageComponent, OptimizationFlowComponent]
+export const routingComponents = [
+  LoginPageComponent, 
+  SelectGroupPageComponent, 
+  CalendarPageComponent, 
+  OptimizationFlowComponent,
+  CalendarPageComponent,
+  ProfilePageComponent]

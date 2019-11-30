@@ -7,9 +7,9 @@ export let scheduleData = {
         {
             Id: 1,
             Subject: 'Limbaje formale si tehnici de compilare',
-            Location: 'FSEGA',
-            StartTime: new Date(2019, 10, 27, 9, 30),
-            EndTime: new Date(2019, 10, 27, 11, 0),
+            Location: 'A312',
+            StartTime: new Date(2019, 10, 25, 8, 0),
+            EndTime: new Date(2019, 10, 25, 10, 0),
             CategoryColor: '#1aaa55',
         }, {
             Id: 2,

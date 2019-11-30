@@ -15,8 +15,6 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 
 import { AngularFireAuth } from '@angular/fire/auth';
-import { ProfilePageComponent } from './profile-page/profile-page.component';
-import { CalendarPageComponent } from './calendar-page/calendar-page.component';
 import { TreeViewModule } from '@syncfusion/ej2-angular-navigations';
 import { DropDownListAllModule, MultiSelectAllModule } from '@syncfusion/ej2-angular-dropdowns';
 import { MaskedTextBoxModule, UploaderAllModule } from '@syncfusion/ej2-angular-inputs';
@@ -31,7 +29,6 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
-import { OptimizationFlowComponent } from './optimization-flow/optimization-flow.component';
 
 @NgModule({
   declarations: [
