@@ -6,7 +6,7 @@ import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule,MatInputModule,MatMenuModule,MatToolbarModule,MatExpansionModule,MatCheckboxModule,MatRadioModule,MatIconModule,MatStepperModule,MatSlideToggleModule } from '@angular/material';
+import { MatFormFieldModule,MatInputModule,MatMenuModule,MatToolbarModule,MatExpansionModule,MatCheckboxModule,MatRadioModule,MatIconModule,MatStepperModule,MatSlideToggleModule,MatSelectModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
 
 import { AngularFireModule } from '@angular/fire';
@@ -15,6 +15,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 
 import { AngularFireAuth } from '@angular/fire/auth';
+import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { CalendarPageComponent } from './calendar-page/calendar-page.component';
 import { TreeViewModule } from '@syncfusion/ej2-angular-navigations';
 import { DropDownListAllModule, MultiSelectAllModule } from '@syncfusion/ej2-angular-dropdowns';
@@ -52,6 +53,7 @@ import { OptimizationFlowComponent } from './optimization-flow/optimization-flow
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatSelectModule
     MatMenuModule,
     MatToolbarModule,
     MatExpansionModule,
