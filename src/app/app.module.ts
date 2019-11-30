@@ -53,7 +53,7 @@ import { OptimizationFlowComponent } from './optimization-flow/optimization-flow
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatSelectModule
+    MatSelectModule,
     MatMenuModule,
     MatToolbarModule,
     MatExpansionModule,
