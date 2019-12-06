@@ -1,57 +1,71 @@
-<div style="background-color: rgb(179, 224, 255); height: 91.5vh;">
+<div style="background-color: rgb(179, 224, 255); height: 723px;">
   <mat-horizontal-stepper class="flow" style="background-color: rgb(179, 224, 255); color: black;" [linear]="true" #stepper>
-    <mat-step [stepControl]="firstFormGroup">
+    <mat-step [stepControl]="firstFormGroup" disableRipple="true">
+      <ng-template matStepLabel>Preferences</ng-template>
       <form [formGroup]="firstFormGroup">
-        <ng-template matStepLabel>Parameters</ng-template>
         <div class="in-stepper">
           <div class="flex flex-col">
-            <div class="param flex flex-row"><div class="paramLabel">Param1</div><mat-slide-toggle class="tgl"></mat-slide-toggle></div>
-            <div class="param flex flex-row"><div class="paramLabel">Param2</div><mat-slide-toggle class="tgl"></mat-slide-toggle></div>
-            <div class="param flex flex-row"><div class="paramLabel">Param3</div><mat-slide-toggle class="tgl"></mat-slide-toggle></div>
-            <div class="param flex flex-row"><div class="paramLabel">Param4</div><mat-slide-toggle class="tgl"></mat-slide-toggle></div>
-            <div class="param flex flex-row"><div class="paramLabel">Param5</div><mat-slide-toggle class="tgl"></mat-slide-toggle></div>
+            <button mat-button>Add preference</button>
           </div>
         </div>
         <div class="flex flex-row flex-horizontal-center butoane">
           <button class="nextBtn" mat-button matStepperNext>Next</button>
-          <button class="readMore" mat-button>Read more</button>
+          <button class="readMore" mat-button (click)="openDialog()">Not sure? Read more</button>
         </div>
       </form>
     </mat-step>
     <mat-step [stepControl]="secondFormGroup">
+      <ng-template matStepLabel>Algorithm</ng-template>
       <form [formGroup]="secondFormGroup">
-        <ng-template matStepLabel>Algorithm</ng-template>
-        <div class="in-stepper flex flex-row flex-horizontal-center">
+        <div class="in-stepper flex flex-col flex-vertical-center">
+          <h4 class="connect-header" style="margin-bottom: 0;">We are now connecting the dots.</h4>
+          <p style="font-size: 15px;">This step might take a few minutes. Please be patient! </p> 
           <img src="../assets/img/server-room.jpg">
-          <div>
-            <h5 class="connect-header">We are now connecting the dots.</h5>
-          </div>
         </div>
         <div class="flex flex-row flex-horizontal-center butoane">
-          <button class="nextBtn" mat-button matStepperNext>Next</button>
-          <button class="readMore" mat-button matStepperPrevious>Abort</button>
+          <button mat-raised-button style="background-color: rgb(19, 60, 85)" matStepperNext>
+            <mat-spinner [diameter]="30"></mat-spinner>
+          </button>
+          <button class="readMore" style="margin-left: 5px;" mat-button matStepperPrevious>Step back</button>
         </div>
       </form>
     </mat-step>
     <mat-step>
         <ng-template matStepLabel>Overview</ng-template>
         <div class="in-stepper">
-
+          <mat-list>
+              <h3 mat-subheader>Changed</h3>
+              <mat-list-item *ngFor="let folder of folders">
+                <mat-icon mat-list-icon>done_outline</mat-icon>
+                <h4 mat-line>{{folder.name}}</h4>
+                <p mat-line> {{folder.updated | date}} </p>
+              </mat-list-item>
+              <mat-divider></mat-divider>
+              <h3 mat-subheader>Unable to satisfy your preferences</h3>
+              <mat-list-item *ngFor="let note of notes">
+                <mat-icon mat-list-icon>feedback</mat-icon>
+                <h4 mat-line>{{note.name}}</h4>
+                <p mat-line> {{note.updated | date}} </p>
+              </mat-list-item>
+          </mat-list>
         </div>
         <div class="flex flex-row flex-horizontal-center butoane">
-          <button class="nextBtn" mat-button matStepperNext>Next</button>
-          <button class="readMore" mat-button matStepperPrevious>Abort</button>
+          <button class="nextBtn" (click)="userAgreedToChange()" mat-button matStepperNext>Agree</button>
+          <button class="readMore" (click)="userDroppedChanges()" mat-button matStepperNext>Drop changes</button>
         </div>
       </mat-step>
     <mat-step>
       <ng-template matStepLabel>Finish</ng-template>
-      <div class="flex flex-col laststep">
+      <div class="flex flex-col">
         <div class="flex flex-row flex-horizontal-center">
-          Your schedule is now setting up...
+          <h5 style="margin-bottom: 5px;">{{endMessage}}</h5>
+        </div>
+        <div class="flex flex-row flex-horizontal-center" style="margin-bottom: 3rem;">
+          <p style="font-size: 14px;">{{endMessageDescription}}</p>
         </div>
         <div class="flex flex-row flex-horizontal-center">
-          <button class="nextBtn" mat-button>Read more</button>
-          <button class="readMore" mat-button>Home</button>
+          <button class="nextBtn" style="margin-right: 5px;" mat-button (click)="openDialog()">Read more</button>
+          <button class="readMore" mat-button routerLink="/timetable">Go to Timetable</button>
         </div>
       </div>
     </mat-step>

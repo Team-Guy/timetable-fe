@@ -6,15 +6,16 @@ import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule,MatInputModule,MatMenuModule,MatToolbarModule,MatExpansionModule,MatCheckboxModule,MatRadioModule,MatIconModule,MatStepperModule,MatSlideToggleModule,MatSelectModule } from '@angular/material';
+import { MatFormFieldModule,MatInputModule,MatMenuModule,MatToolbarModule,MatExpansionModule,MatCheckboxModule,MatRadioModule,MatIconModule,MatStepperModule,MatSlideToggleModule,MatSelectModule, MatDialogModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
+import {MatListModule} from '@angular/material/list';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 
-import { AngularFireAuth } from '@angular/fire/auth';
 import { TreeViewModule } from '@syncfusion/ej2-angular-navigations';
 import { DropDownListAllModule, MultiSelectAllModule } from '@syncfusion/ej2-angular-dropdowns';
 import { MaskedTextBoxModule, UploaderAllModule } from '@syncfusion/ej2-angular-inputs';
@@ -29,14 +30,14 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FooterComponent } from './footer/footer.component';
+import { DialogContentExampleDialog } from './optimization-flow/optimization-flow.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     routingComponents,
     NavbarComponent,
-    FooterComponent
+    DialogContentExampleDialog
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -62,6 +63,9 @@ import { FooterComponent } from './footer/footer.component';
     MatIconModule,
     MatStepperModule,
     MatSlideToggleModule,
+    MatProgressSpinnerModule,
+    MatListModule,
+    MatDialogModule,
 
     CommonModule, 
     HttpModule, 
@@ -82,6 +86,7 @@ import { FooterComponent } from './footer/footer.component';
     ButtonAllModule
   ],
   providers: [],
-  bootstrap: [AppComponent, NavbarComponent, FooterComponent]
+  bootstrap: [AppComponent, NavbarComponent],
+  entryComponents: [DialogContentExampleDialog]
 })
 export class AppModule { }

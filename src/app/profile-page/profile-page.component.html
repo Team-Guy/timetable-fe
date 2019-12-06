@@ -3,9 +3,9 @@
     <h5 style="margin-bottom: 0; color: rgb(88, 88, 88)">Everybody is different. Customize your data.</h5>
   </div>
 
-  <div class="flex flex-row flex-horizontal-center">
+  <div class="flex flex-col flex-horizontal-center">
 
-    <div class="flex flex-col flex-horizontal-center">
+    <div class="flex flex-col flex-horizontal-center accordion">
       <mat-accordion>
         <mat-expansion-panel>
           <mat-expansion-panel-header>
@@ -16,13 +16,9 @@
               Type your name and group.
             </mat-panel-description>
           </mat-expansion-panel-header>
-          <form class="flex flex-col">
+          <form class="flex flex-col this-form">
             <mat-form-field class="topinfo">
-              <input matInput placeholder="First name">
-            </mat-form-field>
-
-            <mat-form-field class="info">
-              <input matInput placeholder="Last name">
+              <input matInput placeholder="Name">
             </mat-form-field>
 
             <mat-form-field class="text-full-width info">
@@ -40,13 +36,13 @@
         <mat-expansion-panel>
           <mat-expansion-panel-header>
             <mat-panel-title>
-
+              Optional courses
             </mat-panel-title>
             <mat-panel-description>
-              First year optional courses.
+              Select yours.
             </mat-panel-description>
           </mat-expansion-panel-header>
-          <form class="flex flex-col">
+          <form class="flex flex-col this-form">
             <mat-form-field class="text-full-width topinfo">
               <input type="text" placeholder="1st sem" aria-label="Number" matInput>
               <mat-select [formControl]="optionals" multiple>
@@ -70,43 +66,13 @@
         <mat-expansion-panel>
           <mat-expansion-panel-header>
             <mat-panel-title>
-
+              Additional information
             </mat-panel-title>
             <mat-panel-description>
-              Second year optional courses.
+              Decide what's important to you.
             </mat-panel-description>
           </mat-expansion-panel-header>
-          <form class="flex flex-col">
-            <mat-form-field class="text-full-width topinfo">
-              <input type="text" placeholder="1st sem" aria-label="Number" matInput>
-              <mat-select [formControl]="optionals" multiple>
-                <mat-option *ngFor="let optional of optionalList" [value]="optional">
-                  {{optional}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-
-            <mat-form-field class="text-full-width">
-              <input type="text" placeholder="2nd sem" aria-label="Number" matInput>
-              <mat-select [formControl]="optionals" multiple>
-                <mat-option *ngFor="let optional of optionalList" [value]="optional">
-                  {{optional}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </form>
-        </mat-expansion-panel>
-
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-
-            </mat-panel-title>
-            <mat-panel-description>
-              Third year optional courses.
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <form class="flex flex-col">
+          <form class="flex flex-col this-form">
             <mat-form-field class="text-full-width topinfo">
               <input type="text" placeholder="1st sem" aria-label="Number" matInput>
               <mat-select [formControl]="optionals" multiple>
@@ -128,11 +94,11 @@
         </mat-expansion-panel>
       </mat-accordion>
       <div class="flex flex-row commit-btn">
-        <button mat-flat-button id="btnCommit">Commit</button>
+        <button mat-flat-button id="btnCommit">Save</button>
       </div>
     </div>
-    <div class="flex flex-row flex-horizontal-center">
-      <img id="profile-image" src="../../assets/img/profile.gif" />
-    </div>
+  </div>
+  <div class="bottom-gif">
+    <img id="profile-image" src="../../assets/img/profile.gif" />
   </div>
 </div>

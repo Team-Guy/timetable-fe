@@ -39,13 +39,13 @@
 }
 
 .readMore{
-    border: 0.4px solid;
+    border: none;
     border-color: rgb(19, 60, 85);
     margin: 0 0 0 0.1rem;
 }
 
 .butoane{
-    margin-left: 40vw;
+    margin-left: 60vw;
 }
 
 .param{
@@ -87,7 +87,16 @@ img {
 
 .in-stepper{
     margin: 0 2rem 0 2rem;
-    min-width: 800px;
-    min-height: 50vh;
-    max-height: 50vh;
+}
+
+/deep/ mat-spinner circle, .mat-spinner circle {
+    stroke: white !important;
+}
+
+.mat-list-icon {
+    color: rgba(0, 0, 0, 0.54);
+}
+
+::ng-deep .mat-horizontal-stepper-header{
+    pointer-events: none !important;
 }

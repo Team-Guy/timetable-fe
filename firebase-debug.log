@@ -1,0 +1,17 @@
+[debug] [2019-12-06T11:17:08.099Z] ----------------------------------------------------------------------
+[debug] [2019-12-06T11:17:08.101Z] Command:       /usr/local/Cellar/node/12.1.0/bin/node /usr/local/bin/firebase deploy --only hosting -m We have something inside the timetable
+[debug] [2019-12-06T11:17:08.101Z] CLI Version:   7.6.2
+[debug] [2019-12-06T11:17:08.101Z] Platform:      darwin
+[debug] [2019-12-06T11:17:08.101Z] Node Version:  v12.1.0
+[debug] [2019-12-06T11:17:08.102Z] Time:          Fri Dec 06 2019 13:17:08 GMT+0200 (Eastern European Standard Time)
+[debug] [2019-12-06T11:17:08.102Z] ----------------------------------------------------------------------
+[debug] [2019-12-06T11:17:08.102Z] 
+[debug] [2019-12-06T11:17:08.112Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-12-06T11:17:08.112Z] > authorizing via signed-in user
+[debug] [2019-12-06T11:17:08.112Z] [iam] checking project ubb-timetable for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2019-12-06T11:17:08.114Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-12-06T11:17:08.114Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-12-06T11:17:43.342Z] <<< HTTP RESPONSE 200
+[debug] [2019-12-06T11:17:43.355Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/ubb-timetable:testIamPermissions  
+

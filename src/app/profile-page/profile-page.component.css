@@ -1,7 +1,7 @@
 #profile-image{
     width: 650px;
     height: auto;
-    margin: 0 -10rem 0 1rem;
+    margin: 0 0 0 0;
 }
 
 .personal-info{
@@ -45,4 +45,34 @@
 .commit-btn {
     margin-top: 1rem;
     margin-left: auto;
+}
+
+.accordion {
+    margin-top: 20px;
+    width: 60%;
+    margin: auto;
+}
+
+.mat-accordion {
+    margin-top: 1rem;
+}
+
+.bottom-gif {
+    margin: auto;
+    position: fixed;
+    bottom: -1rem;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    z-index: -1;
+}
+
+.this-form {
+    max-width: 80%;
+    margin: auto;
+}
+
+/deep/ body {
+    background-color: white;
 }

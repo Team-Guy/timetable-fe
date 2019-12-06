@@ -2,3 +2,13 @@
     background-color: white;
     color: black;
 }
+
+#menu {
+    margin-top: 40px;
+}
+
+/deep/ .mat-menu-panel {
+    margin-top: 10px;
+    width: 300px;
+    max-width: 600px !important;
+}

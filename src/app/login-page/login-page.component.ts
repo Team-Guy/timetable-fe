@@ -35,10 +35,6 @@ export class LoginPageComponent implements OnInit {
     });
   }
 
-  ngAfterViewInit(){
-    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#143C55';
-  }
-
   ngOnInit() {
     this.firebase.authState.subscribe(user => {
       if(user != null) {

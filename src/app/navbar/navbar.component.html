@@ -1,13 +1,28 @@
-<mat-toolbar class="color-scheme" color="primary">
-  <span routerLink="/timetable">_timetable</span>
+<mat-toolbar class="color-scheme" color="primary" style="height: 48px">
+  <span routerLink="/timetable" style="cursor: pointer;">_timetable</span>
 
   <!-- This fills the remaining space of the current row -->
-  <button mat-icon-button style="margin-left: auto" mat-button [matMenuTriggerFor]="menu">
+  <button mat-icon-button style="margin-left: auto;" mat-button [matMenuTriggerFor]="menu">
     <img style="height: 35px; width: 35px; border-radius: 20px;"
     src="https://images.unsplash.com/photo-1499084732479-de2c02d45fcc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80">
   </button>
-  <mat-menu #menu="matMenu">
-    <button routerLink="/profile" mat-menu-item>Profile</button>
-    <button mat-menu-item>Read more</button>
+  <mat-menu #menu="matMenu" id="menu">
+    <div class="flex flex-col flex-vertical-center">
+      <div>
+       <img style="margin-top: 10px; height: 70px; width: 70px; border-radius: 40px;" 
+      src="https://images.unsplash.com/photo-1499084732479-de2c02d45fcc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80">
+      </div>
+      <div>
+       <p style="margin: 0.2rem; margin-top: 0.4rem; font-size: 20px;">{{userName}}</p>
+      </div>
+      <p style="margin: 0.2rem; margin-top: 0; font-size: 12px; color: gray">{{emailAddress}}</p>
+    </div>
+    <button routerLink="/profile" style="width: 80%; margin: auto; margin-top: 0.4rem; border: 1px; border-radius: 5px;" mat-menu-item>Manage your Timetable Account</button>
+    <hr style="width:80%;height:1px;border:none;color:lightgray;background-color:lightgray;">
+    <button style="width: 80%; margin: auto; border: 1px; border-radius: 5px; text-align: center !important;" mat-menu-item (click)="openDialog()">Read our guidelines</button>
+    <button routerLink="/timetable" style="width: 80%; margin: auto; border: 1px; border-radius: 5px; text-align: center !important;" mat-menu-item>Timetable</button>
+    <button routerLink="/profile" style="width: 80%; margin: auto; border: 1px; border-radius: 5px; text-align: center !important;" mat-menu-item>Sign out</button>
+    <hr style="width:80%;height:1px;border:none;color:lightgray;background-color:lightgray;">
+    <p style="margin: auto; padding-top: 0.2rem; padding-bottom: 0.2rem; text-align: center; font-size: 10px"> <a>Personal data</a> . <a>Terms of services</a> </p>
   </mat-menu>
 </mat-toolbar>
