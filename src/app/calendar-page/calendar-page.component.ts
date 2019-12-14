@@ -51,31 +51,23 @@ export class CalendarPageComponent implements OnInit {
   constructor(private http: HttpClient) { 
     http.get('http://timetable.epixmobile.ro/schedule/raul').subscribe(
       (response) => {
-        console.log(response);
         var a = this.scheduleObj.getCurrentViewDates();
-        console.log(a[0]);
         let toto = {
           University: [],
           Personal: []
         }
         let dayName = ["monday", "tuesday", "wednesday", "thursday", "friday"]
         let k = 0;
-        console.log(Object.keys(response['1']).length)
-        console.log(response['1'][dayName[0]][0]);
+
         for(let j = 0; j < 5; j++) {
           for(let t = 0; t < Object.keys(response['1'][dayName[j]]).length; t++) {
-            // for each activity
             
-            console.log(dayName[t]);
             let start_time = new Date(a[j] as Date);
             start_time.setTime(start_time.setHours(response['1'][dayName[j]][t]['start_time'].split(':')[0] as number))
             
             let end_time = new Date(a[j] as Date);
             end_time.setTime(end_time.setHours(response['1'][dayName[j]][t]['start_time'].split(':')[0] as number))
             end_time.setTime(end_time.getTime() + (response['1'][dayName[j]][t]['duration'] * 60 * 60 * 1000))
-
-            console.log(start_time);
-            console.log(end_time);
             
             let activity = { Id: k,
               Subject: response['1'][dayName[j]][t]['title'],
