@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-profile-page',
@@ -11,23 +14,84 @@ import { map, startWith } from 'rxjs/operators';
 export class ProfilePageComponent implements OnInit {
 
   myControl = new FormControl();
-  options: string[] = ['931/1', '931/2', '932/1','932/2', '933/1', '933/2','226/1', '226/2', '227/1'];
+  options: any = [];
   optionals = new FormControl();
-  optionalList: string[] = ['mate', 'ceva', 'altcv'];
+  optionalList1: any;
+  optionalList2: any;
   filteredOptions: Observable<string[]>;
+  user: any;
+  group: string;
+  optional1: string;
+  optional2: string;
+  sport: boolean = false;
+  peda: boolean = false;
+  yearOfStudy: number = 3;
 
-  constructor() { }
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private http: HttpClient) {
+    }
 
   ngOnInit() {
-    this.filteredOptions = this.myControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value))
+    this.user = this.authService.getUser();
+    var username = this.user.email.split('@')[0];  
+    //var username= '15dec2'
+    this.http.get('https://timetable.epixmobile.ro/schedule/groups/').subscribe(
+      (response) => {
+        this.options = response;
+        this.filteredOptions = this.myControl.valueChanges.pipe(
+          startWith(''),
+          map(value => this._filter(value))
+        );
+      }
     );
+    this.http.get('https://timetable.epixmobile.ro/auth/optionals/semester/'+this.yearOfStudy*2).subscribe(
+      (response) => {
+        this.optionalList2 = response;
+      }
+    );
+    this.http.get('https://timetable.epixmobile.ro/auth/optionals/semester/'+(this.yearOfStudy*2-1)).subscribe(
+      (response) => {
+        this.optionalList1 = response;
+      }
+    );
+    this.http.get('https://timetable.epixmobile.ro/auth/edit/'+username).subscribe(
+      (response) => {
+        this.group=response['group'];
+        this.sport=response['sport'];
+        this.peda=response['peda'];
+        this.optional1=response['optionals'];
+      }
+    )
   }
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
     return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+  }
+
+  private _capitalize(value: string): string {
+    return value.charAt(0).toUpperCase()+value.slice(1);
+  }
+
+  private _submit() {
+      this.user = this.authService.getUser();
+      var username = this.user.email.split('@')[0];
+      //var username = '15dec2'
+      var allopts = this.optional1.concat(this.optional2);
+      var payload = {
+        "group": this.group,
+        "sport": this._capitalize(this.sport.toString()),
+        "peda": this._capitalize(this.peda.toString()),
+        "optionals": allopts
+      }
+      this.http.post('https://timetable.epixmobile.ro/auth/edit/'+username, payload).subscribe(
+        (response)=>{
+          console.log(response);
+        }
+      );
+    //this.router.navigate(['/timetable']);
   }
 
 }
