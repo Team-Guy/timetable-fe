@@ -1,8 +1,7 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormControl, FormGroup } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { auth } from 'firebase';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login-page',
@@ -11,38 +10,36 @@ import { auth } from 'firebase';
 })
 export class LoginPageComponent implements OnInit {
 
-  googleAuthProvider = new auth.GoogleAuthProvider();
+  disableLogIn = false;
 
-  constructor(private elementRef: ElementRef, private firebase: AngularFireAuth, private router: Router) {
+  constructor(
+    private elementRef: ElementRef,
+    private firebase: AngularFireAuth,
+    private router: Router,
+    private authService: AuthService) {
   }
 
-  onLoginIntent() {
-    this.firebase.auth.signInWithPopup(this.googleAuthProvider).then(function(result) {
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      var token = (<any>result).credential.accessToken;
-      // The signed-in user info.
-      this.user = result.user;
-    }).catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      console.log(errorMessage);
-      // The email of the user's account used.
-      var email = error.email;
-      // The firebase.auth.AuthCredential type that was used.
-      var credential = error.credential;
-      // ...
-    });
+  onLoginIntent(): void {
+    this.authService.login();
   }
 
   ngOnInit() {
-    this.firebase.authState.subscribe(user => {
-      if(user != null) {
-        this.router.navigate(['/selectgroup']);
+    this.firebase.authState.subscribe(firebaseUser => {
+      if (firebaseUser != null) {
+        this.authService.sendMessage({ showMenu: false, user: firebaseUser });
+        this.authService.commitUser(firebaseUser);
+        if (this.authService.isNewUser) {
+          this.router.navigate(['/selectgroup']);
+          console.log(firebaseUser);
+        } else {
+          this.authService.sendMessage({showMenu: true});
+          this.authService.commitMenuDisplaySettings(true);
+          this.router.navigate(['/timetable']);
+        }
       } else {
-        // ...
+        this.authService.commitUser(firebaseUser);
+        this.authService.clearMessages();
       }
     });
   }
-
 }

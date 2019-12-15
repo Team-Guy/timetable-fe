@@ -1,5 +1,5 @@
 #profile-image{
-    width: 650px;
+    width: 700px;
     height: auto;
     margin: 0 0 0 0;
 }
@@ -49,7 +49,8 @@
 
 .accordion {
     margin-top: 20px;
-    width: 60%;
+    max-width: 600px;
+    width: 80%;
     margin: auto;
 }
 

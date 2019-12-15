@@ -16,8 +16,8 @@ div {width: 100vw;}
 
 #student-image{
     position: fixed;
-    bottom: -1rem;
-    width: 845px;
+    bottom: 1rem;
+    width: 785px;
 }
 
 #gogu-button {
