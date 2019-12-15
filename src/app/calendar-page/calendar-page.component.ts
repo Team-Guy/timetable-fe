@@ -139,14 +139,14 @@ export class CalendarPageComponent implements OnInit {
 
   onPopupOpen(args: PopupOpenEventArgs): void {
     if (args.type === 'Editor') {
-      let statusElement: HTMLInputElement = args.element.querySelector('#EventType') as HTMLInputElement;
+      let statusElement: HTMLInputElement = args.element.querySelector('#PriorityType') as HTMLInputElement;
       if (!statusElement.classList.contains('e-dropdownlist')) {
         let dropDownListObject: DropDownList = new DropDownList({
-          placeholder: 'Choose activity type', value: statusElement.value,
-          dataSource: ['Workshop', 'Sport', 'Movie']
+          placeholder: 'Choose priority', value: statusElement.value,
+          dataSource: ['Low', 'Medium', 'High']
         });
         dropDownListObject.appendTo(statusElement);
-        statusElement.setAttribute('name', 'EventType');
+        statusElement.setAttribute('name', 'PriorityType');
       }
       let startElement: HTMLInputElement = args.element.querySelector('#StartTime') as HTMLInputElement;
       if (!startElement.classList.contains('e-datetimepicker')) {
