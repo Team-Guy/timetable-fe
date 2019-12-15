@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
+import { HttpClient } from '@angular/common/http'
+import { AuthService } from '../services/auth.service';
 
 export interface Section {
   name: string;
@@ -13,6 +15,23 @@ export interface Section {
   styleUrls: ['./optimization-flow.component.css']
 })
 export class OptimizationFlowComponent implements OnInit {
+  monsd: string;
+  moned: string;
+  monmh: string;
+  tuesd: string;
+  tueed: string;
+  tuemh: string;
+  wedsd: string;
+  weded: string;
+  wedmh: string;
+  thusd: string;
+  thued: string;
+  thumh: string;
+  frisd: string;
+  fried: string;
+  frimh: string;
+  user: any;
+  userId: string;
   public endMessage: String = "";
   public endMessageDescription: String = "";
   public folders: Section[] = [
@@ -43,7 +62,9 @@ export class OptimizationFlowComponent implements OnInit {
   secondFormGroup: FormGroup;
 
   constructor(private _formBuilder: FormBuilder,
-    public dialog: MatDialog) {}
+    public dialog: MatDialog,
+    private authService: AuthService,
+    private http: HttpClient) {}
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
@@ -52,6 +73,59 @@ export class OptimizationFlowComponent implements OnInit {
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ['']
     });
+    this.user = this.authService.getUser();
+    //let username = this.user.email.split('@')[0];
+    let username='15dec2';
+    this.http.get('https://timetable.epixmobile.ro/auth/preferences/'+username).subscribe(
+      (response) => {
+        console.log(response);
+        this.monsd = response['mondayStart'];
+        this.moned = response['mondayEnd'];
+        this.monmh = response['mondayMax'];
+        this.tuesd = response['tuesdayStart'];
+        this.tueed = response['tuesdayEnd'];
+        this.tuemh = response['tuesdayMax'];
+        this.wedsd = response['wednesdayStart'];
+        this.weded = response['wednesdayEnd'];
+        this.wedmh = response['wednesdayMax'];
+        this.thusd = response['thursdayStart'];
+        this.thued = response['thursdayEnd'];
+        this.thumh = response['thursdayMax'];
+        this.frisd = response['fridayStart'];
+        this.fried = response['fridayEnd'];
+        this.frimh = response['fridayMax'];
+        this.userId = response['id'];
+      }
+    );
+  }
+
+  goToSecondStep(){
+    this.user = this.authService.getUser();
+    //let username = this.user.email.split('@')[0];
+    let username='15dec2';
+    let payload = {
+      "id": this.userId,
+      "mondayStart": this.monsd,
+      "mondayEnd": this.moned,
+      "tuesdayStart": this.tuesd,
+      "tuesdayEnd": this.tueed,
+      "wednesdayStart": this.wedsd,
+      "wednesdayEnd": this.weded,
+      "thursdayStart": this.thusd,
+      "thursdayEnd": this.thued,
+      "fridayStart": this.frisd,
+      "fridayEnd": this.fried,
+      "mondayMax": this.monmh,
+      "tuesdayMax": this.tuemh,
+      "wednesdayMax": this.wedmh,
+      "thursdayMax": this.thumh,
+      "fridayMax": this.frimh,
+    }
+    this.http.post('https://timetable.epixmobile.ro/auth/preferences/'+username, payload).subscribe(
+      (response) => {
+        console.log(response);
+      }
+    );
   }
 
   userDroppedChanges () {

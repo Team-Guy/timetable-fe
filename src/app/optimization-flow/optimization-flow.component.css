@@ -19,7 +19,7 @@
 :host /deep/ .mat-step-label-selected{
     color: black !important;
 }
-
+/*
 :host /deep/ .mat-form-field-label{
     color: white !important;
 }
@@ -30,7 +30,7 @@
 
 :host /deep/ .mat-form-field-underline{
     background-color: white !important;
-}
+}*/
 
 .nextBtn{
     background-color: rgb(19, 60, 85);
@@ -45,6 +45,7 @@
 }
 
 .butoane{
+    margin-top: 3rem;
     margin-left: 60vw;
 }
 

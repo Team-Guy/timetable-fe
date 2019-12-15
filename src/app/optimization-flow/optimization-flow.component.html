@@ -3,13 +3,116 @@
     <mat-step [stepControl]="firstFormGroup" disableRipple="true">
       <ng-template matStepLabel>Preferences</ng-template>
       <form [formGroup]="firstFormGroup">
-        <div class="in-stepper">
-          <div class="flex flex-col">
-            <button mat-button>Add preference</button>
-          </div>
-        </div>
+        
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Monday
+              </mat-panel-title>
+              <mat-panel-description>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <form class="flex flex-col">
+              <mat-form-field>
+                <input matInput placeholder="Start hour" [(ngModel)]="monsd" name="monsd">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="End hour" [(ngModel)]="moned" name="moned">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Max hours" [(ngModel)]="monmh" name="monmh">
+              </mat-form-field>
+            </form>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Tuesday
+              </mat-panel-title>
+              <mat-panel-description>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <form class="flex flex-col">
+              <mat-form-field>
+                <input matInput placeholder="Start hour" [(ngModel)]="tuesd" name="tuesd">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="End hour" [(ngModel)]="tueed" name="tueed">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Max hours" [(ngModel)]="tuemh" name="tuemh">
+              </mat-form-field>
+            </form>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Wednesday
+              </mat-panel-title>
+              <mat-panel-description>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <form class="flex flex-col">
+              <mat-form-field>
+                <input matInput placeholder="Start hour" [(ngModel)]="wedsd" name="wedsd">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="End hour" [(ngModel)]="weded" name="weded">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Max hours" [(ngModel)]="wedmh" name="wedmh">
+              </mat-form-field>
+            </form>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Thursday
+              </mat-panel-title>
+              <mat-panel-description>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <form class="flex flex-col">
+              <mat-form-field>
+                <input matInput placeholder="Start hour" [(ngModel)]="thusd" name="thusd">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="End hour" [(ngModel)]="thued" name="thued">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Max hours" [(ngModel)]="thumh" name="thumh">
+              </mat-form-field>
+            </form>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Friday
+              </mat-panel-title>
+              <mat-panel-description>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <form class="flex flex-col">
+              <mat-form-field>
+                <input matInput placeholder="Start hour" [(ngModel)]="frisd" name="frisd">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="End hour" [(ngModel)]="fried" name="fried">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Max hours" [(ngModel)]="frimh" name="frimh">
+              </mat-form-field>
+            </form>
+          </mat-expansion-panel>
+        </mat-accordion>
+
         <div class="flex flex-row flex-horizontal-center butoane">
-          <button class="nextBtn" mat-button matStepperNext>Next</button>
+          <button class="nextBtn" mat-button matStepperNext (click)="goToSecondStep()">Next</button>
           <button class="readMore" mat-button (click)="openDialog()">Not sure? Read more</button>
         </div>
       </form>
