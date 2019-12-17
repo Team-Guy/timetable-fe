@@ -53,6 +53,10 @@ export class AuthService {
     return this.menuDisplaySettings;
   }
 
+  skipRegister(): boolean {
+    return this.menuDisplaySettings;
+  }
+
   login() {
     this.firebase.auth.signInWithPopup(this.googleAuthProvider).then((result) => {
       this.isNewUser = result.additionalUserInfo.isNewUser;

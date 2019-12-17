@@ -1,5 +1,5 @@
-<div style="background-color: rgb(179, 224, 255); height: 723px;">
-  <mat-horizontal-stepper class="flow" style="background-color: rgb(179, 224, 255); color: black;" [linear]="true" #stepper>
+<div style="background-color: rgba(142, 184, 229, 1); height: 100vh;">
+  <mat-horizontal-stepper class="flow" style="background-color: rgba(142, 184, 229, 1); color: black;" [linear]="true" #stepper>
     <mat-step [stepControl]="firstFormGroup" disableRipple="true">
       <ng-template matStepLabel>Preferences</ng-template>
       <form [formGroup]="firstFormGroup">
@@ -19,14 +19,14 @@
       <form [formGroup]="secondFormGroup">
         <div class="in-stepper flex flex-col flex-vertical-center">
           <h4 class="connect-header" style="margin-bottom: 0;">We are now connecting the dots.</h4>
-          <p style="font-size: 15px;">This step might take a few minutes. Please be patient! </p> 
+          <p style="font-size: 15px;">This step might take a few minutes. Please be patient! </p>
           <img src="../assets/img/server-room.jpg">
         </div>
         <div class="flex flex-row flex-horizontal-center butoane">
           <button mat-raised-button style="background-color: rgb(19, 60, 85)" matStepperNext>
             <mat-spinner [diameter]="30"></mat-spinner>
           </button>
-          <button class="readMore" style="margin-left: 5px;" mat-button matStepperPrevious>Step back</button>
+          <button class="readMore" style="margin-left: 5px;" mat-button routerLink="/timetable">Abort</button>
         </div>
       </form>
     </mat-step>
@@ -51,7 +51,7 @@
         </div>
         <div class="flex flex-row flex-horizontal-center butoane">
           <button class="nextBtn" (click)="userAgreedToChange()" mat-button matStepperNext>Agree</button>
-          <button class="readMore" (click)="userDroppedChanges()" mat-button matStepperNext>Drop changes</button>
+          <button class="readMore" (click)="userDroppedChanges()" mat-button matStepperNext>Nope</button>
         </div>
       </mat-step>
     <mat-step>

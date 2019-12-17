@@ -2,7 +2,11 @@
 
 div {width: 100%;}
 
-.textbox-form{z-index: 1;}
+.textbox-form{z-index: 1; width: 300px;}
+
+.text-full-width {
+  width: 100%;
+}
 
 .select-group {margin-top: 2rem;}
 

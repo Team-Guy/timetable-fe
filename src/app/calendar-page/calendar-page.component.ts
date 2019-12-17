@@ -52,49 +52,57 @@ export class CalendarPageComponent implements OnInit {
   public switchWeekIndex = 0;
   public switchWeek: string = this.switchWeekOptions[this.switchWeekIndex];
 
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
   constructor(private http: HttpClient, private authService: AuthService, private router: Router) {
-    this.http.get('http://timetable.epixmobile.ro/schedule/raul').subscribe(
-      (response) => {
-        const a = this.scheduleObj.getCurrentViewDates();
-        let toto = {
-          University: [],
-          Personal: []
-        }
-        let dayName = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
-        let k = 0;
+    // aici e buba!!
+    if (!this.authService.user) {
+      this.delay(3000).then(() => {
+        const username = this.authService.user.email.split('@')[0];
+        this.http.get('https://timetable.epixmobile.ro/schedule/save_last/' + username).subscribe(
+          (response) => {
+            console.log(response);
+            const a = this.scheduleObj.getCurrentViewDates();
+            let toto = {
+              University: [],
+              Personal: []
+            }
+            let dayName = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
+            let k = 0;
 
-        for (let j = 0; j < 5; j++) {
-          for (let t = 0; t < Object.keys(response['1'][dayName[j]]).length; t++) {
+            for (let j = 0; j < 5; j++) {
+              for (let t = 0; t < Object.keys(response['school']['1'][dayName[j]]).length; t++) {
 
-            let start_time = new Date(a[j] as Date);
-            start_time.setTime(start_time.setHours(response['1'][dayName[j]][t]['start_time'].split(':')[0] as number));
+                let start_time = new Date(a[j] as Date);
+                start_time.setTime(start_time.setHours(response['school']['1'][dayName[j]][t]['start_time'].split(':')[0] as number));
 
-            let end_time = new Date(a[j] as Date);
-            end_time.setTime(end_time.setHours(response['1'][dayName[j]][t]['start_time'].split(':')[0] as number));
-            end_time.setTime(end_time.getTime() + (response['1'][dayName[j]][t]['duration'] * 60 * 60 * 1000));
+                let end_time = new Date(a[j] as Date);
+                end_time.setTime(end_time.setHours(response['school']['1'][dayName[j]][t]['start_time'].split(':')[0] as number));
+                end_time.setTime(end_time.getTime() + (response['school']['1'][dayName[j]][t]['duration'] * 60 * 60 * 1000));
 
-            let activity = {
-              Id: k,
-              Subject: response['1'][dayName[j]][t]['title'],
-              Location: response['1'][dayName[j]][t]['location'],
-              StartTime: start_time,
-              EndTime: end_time,
-              CategoryColor: 'red'
-            };
+                let activity = {
+                  Id: k,
+                  Subject: response['school']['1'][dayName[j]][t]['title'],
+                  Location: response['school']['1'][dayName[j]][t]['location'],
+                  StartTime: start_time,
+                  EndTime: end_time,
+                  CategoryColor: 'red'
+                };
 
-            toto.University.push(activity);
-            k++;
-          }
-        }
-        this.scheduleObj.eventSettings.dataSource = <Object[]>extend([], toto.University, null, true);
-      }
-    )
+                toto.University.push(activity);
+                k++;
+              }
+            }
+            this.scheduleObj.eventSettings.dataSource = <Object[]>extend([], toto.University, null, true);
+          }, (error) => { console.log('error', error); }
+        );
+      });
+    }
   }
 
   ngOnInit() {
-    if (this.authService.getMenuDisplaySettings() === false) {
-      this.router.navigate(['/']);
-    }
   }
 
   public onExportClick(): void {
@@ -139,14 +147,14 @@ export class CalendarPageComponent implements OnInit {
 
   onPopupOpen(args: PopupOpenEventArgs): void {
     if (args.type === 'Editor') {
-      let statusElement: HTMLInputElement = args.element.querySelector('#EventType') as HTMLInputElement;
+      let statusElement: HTMLInputElement = args.element.querySelector('#PriorityType') as HTMLInputElement;
       if (!statusElement.classList.contains('e-dropdownlist')) {
         let dropDownListObject: DropDownList = new DropDownList({
-          placeholder: 'Choose activity type', value: statusElement.value,
-          dataSource: ['Workshop', 'Sport', 'Movie']
+          placeholder: 'Activity priority', value: statusElement.value,
+          dataSource: ['Low', 'Medium', 'High']
         });
         dropDownListObject.appendTo(statusElement);
-        statusElement.setAttribute('name', 'EventType');
+        statusElement.setAttribute('name', 'PriorityType');
       }
       let startElement: HTMLInputElement = args.element.querySelector('#StartTime') as HTMLInputElement;
       if (!startElement.classList.contains('e-datetimepicker')) {

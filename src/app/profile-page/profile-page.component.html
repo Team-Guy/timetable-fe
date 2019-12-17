@@ -1,4 +1,4 @@
-<div class="flex flex-col">
+<div class="flex flex-col" style="background-color: white; margin-top: 5px;">
   <div class="flex flex-row flex-horizontal-center">
     <h5 style="margin-bottom: 0; color: rgb(88, 88, 88)">Everybody is different. Customize your data.</h5>
   </div>
@@ -13,17 +13,13 @@
               Personal data
             </mat-panel-title>
             <mat-panel-description>
-              Type your name and group.
+              Type your group.
             </mat-panel-description>
           </mat-expansion-panel-header>
           <form class="flex flex-col this-form">
-            <mat-form-field class="topinfo">
-              <input matInput placeholder="Name">
-            </mat-form-field>
-
             <mat-form-field class="text-full-width info">
               <input type="text" placeholder="Group" aria-label="Number" matInput [formControl]="myControl"
-                [matAutocomplete]="auto">
+                [matAutocomplete]="auto" [(ngModel)]="group">
               <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
                 <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                   {{option}}
@@ -44,18 +40,16 @@
           </mat-expansion-panel-header>
           <form class="flex flex-col this-form">
             <mat-form-field class="text-full-width topinfo">
-              <input type="text" placeholder="1st sem" aria-label="Number" matInput>
-              <mat-select [formControl]="optionals" multiple>
-                <mat-option *ngFor="let optional of optionalList" [value]="optional">
+              <mat-select placeholder="1st sem" [formControl]="optionals" [(ngModel)]="optional1" multiple>
+                <mat-option *ngFor="let optional of optionalList1" [value]="optional">
                   {{optional}}
                 </mat-option>
               </mat-select>
             </mat-form-field>
 
             <mat-form-field class="text-full-width">
-              <input type="text" placeholder="2nd sem" aria-label="Number" matInput>
-              <mat-select [formControl]="optionals" multiple>
-                <mat-option *ngFor="let optional of optionalList" [value]="optional">
+              <mat-select placeholder="2nd sem" [formControl]="optionals" [(ngModel)]="optional2" multiple>
+                <mat-option *ngFor="let optional of optionalList2" [value]="optional">
                   {{optional}}
                 </mat-option>
               </mat-select>
@@ -73,28 +67,13 @@
             </mat-panel-description>
           </mat-expansion-panel-header>
           <form class="flex flex-col this-form">
-            <mat-form-field class="text-full-width topinfo">
-              <input type="text" placeholder="1st sem" aria-label="Number" matInput>
-              <mat-select [formControl]="optionals" multiple>
-                <mat-option *ngFor="let optional of optionalList" [value]="optional">
-                  {{optional}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-
-            <mat-form-field class="text-full-width">
-              <input type="text" placeholder="2nd sem" aria-label="Number" matInput>
-              <mat-select [formControl]="optionals" multiple>
-                <mat-option *ngFor="let optional of optionalList" [value]="optional">
-                  {{optional}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
+            <mat-checkbox class="flex flex-row flex-horizontal-center" [(ngModel)]="sport" name="sport">Sport class</mat-checkbox>
+            <mat-checkbox class="flex flex-row flex-horizontal-center" [(ngModel)]="peda" name="peda">Pedagogy module</mat-checkbox>
           </form>
         </mat-expansion-panel>
       </mat-accordion>
       <div class="flex flex-row commit-btn">
-        <button mat-flat-button id="btnCommit">Save</button>
+        <button mat-flat-button id="btnCommit" (click)="_submit()">Save</button>
       </div>
     </div>
   </div>

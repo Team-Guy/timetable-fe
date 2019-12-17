@@ -1,14 +1,31 @@
-<div style="background-color: #8EB8E5; padding-bottom: 80vh" class="flex flex-center">
+<div style="background-color: rgba(142, 184, 229, 0.4); padding-bottom: 60vh" class="flex flex-center">
 
-  <div class="flex flex-row flex-horizontal-center select-group">
-      <form class="textbox-form">
+  <div class="flex flex-col flex-vertical-center select-group">
+      <form class="textbox-form flex flex-col flex-vertical-center">
         <mat-form-field class="text-full-width">
-          <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+          <input type="text" [(ngModel)]="selectedGroup" placeholder="Select your group"
+          aria-label="Number" matInput [formControl]="optionals" [matAutocomplete]="auto">
           <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option" (click)="getOptionals()">
               {{option}}
             </mat-option>
           </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-form-field class="text-full-width topinfo">
+          <mat-select placeholder="1st sem" [(ngModel)]="firstOptional" [formControl]="optionals" multiple>
+            <mat-option *ngFor="let optional of firstSemesterOptList" [value]="optional">
+              {{optional}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="text-full-width topinfo">
+          <mat-select placeholder="2st sem" [(ngModel)]="secondOptional" [formControl]="optionals" multiple>
+            <mat-option *ngFor="let optional of secondSemesterOptList" [value]="optional">
+              {{optional}}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
       </form>
       <button mat-raised-button class="button-select" (click)="set()">Set</button>
