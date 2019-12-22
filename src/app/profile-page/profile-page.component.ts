@@ -84,13 +84,13 @@ export class ProfilePageComponent implements OnInit {
       peda: this._capitalize(this.peda.toString()),
       optionals: allopts
     }
-    this.http.post('https://timetable.epixmobile.ro/auth/edit/' + username, payload).subscribe(
+    const promise = this.http.post('https://timetable.epixmobile.ro/auth/edit/' + username, payload).toPromise();
+    promise.then(
       (response) => {
         console.log(response);
+        this.router.navigate(['/timetable']);
       }
     );
-
-    this.router.navigate(['/timetable']);
   }
 
 }

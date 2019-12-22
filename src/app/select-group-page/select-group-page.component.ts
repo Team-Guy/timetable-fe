@@ -5,6 +5,7 @@ import { map, startWith } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -22,6 +23,9 @@ export class SelectGroupPageComponent implements OnInit {
   secondOptional = [];
   firstSemesterOptList: string[];
   secondSemesterOptList: string[];
+  user;
+  statusSubscription: Subscription;
+
 
   constructor(
     private authService: AuthService,
@@ -30,10 +34,14 @@ export class SelectGroupPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    // Skip this page if the user is already registered.
-    if (this.authService.skipRegister() === true) {
-      this.router.navigate(['/timetable']);
-    }
+    // Get the last user value
+    this.statusSubscription = this.authService.getStatus().subscribe((status) => {
+
+      // Skip this page if the user is already registered.
+      if (status === false) {
+        this.router.navigate(['/timetable']);
+      }
+    });
 
     // Loading all groups from the backend.
     this.http.get('https://timetable.epixmobile.ro/schedule/groups/')
@@ -45,6 +53,11 @@ export class SelectGroupPageComponent implements OnInit {
             map(value => this._filter(value))
           );
         });
+
+    // Get the last user value
+    this.authService.getUser().subscribe((user) => {
+      this.user = user;
+    });
   }
 
   private _filter(value: string): string[] {
@@ -74,50 +87,50 @@ export class SelectGroupPageComponent implements OnInit {
   }
 
   async set() {
-    const username = this.authService.user.email.split('@')[0];
+    const username = this.user.email.split('@')[0];
 
     // The following console.log() has debug purposes.
     // Remove it when the register flow is complete.
     console.log(
       {
-        uid: this.authService.user.uid,
-        name: this.authService.user.displayName,
+        uid: this.user.uid,
+        name: this.user.displayName,
         group: this.selectedGroup,
-        email: this.authService.user.email,
-        photo: this.authService.user.photoURL,
+        email: this.user.email,
+        photo: this.user.photoURL,
         op1: this.firstOptional,
         op2: this.secondOptional,
         user: username,
         all: this.firstOptional.concat(this.secondOptional)
       }
     );
-    this.authService.sendMessage({ showMenu: true });
-    this.authService.commitMenuDisplaySettings(true);
-    this.router.navigate(['/timetable']);
     // This section has debug purposes. Skip it.
 
-    const authRegisterResponse = await this.http.post('https://timetable.epixmobile.ro/auth/register/',
+    const authRegisterResponse = this.http.post('https://timetable.epixmobile.ro/auth/register/',
       {
-        uid: this.authService.user.uid,
-        name: this.authService.user.displayName,
+        uid: this.user.uid,
+        name: this.user.displayName,
         group: this.selectedGroup,
-        email: this.authService.user.email,
-        photo: this.authService.user.photoURL
+        email: this.user.email,
+        photo: this.user.photoURL
       }
     ).toPromise();
 
-    const authOptionalUsernameResponse = await this.http.post('https://timetable.epixmobile.ro/auth/optionals/' + username,
+    authRegisterResponse.then(() => {
+      const authOptionalUsernameResponse = this.http.post('https://timetable.epixmobile.ro/auth/optionals/' + username,
       {
         sport: 'False',
         peda: 'False',
         optionals: this.firstOptional.concat(this.secondOptional)
       }
-    ).toPromise();
+      ).toPromise();
 
-    console.log(authOptionalUsernameResponse);
-    this.authService.sendMessage({ showMenu: true });
-    this.authService.commitMenuDisplaySettings(true);
-    this.router.navigate(['/timetable']);
+      authOptionalUsernameResponse.then((response) => {
+          console.log(response);
+          this.authService.status.next(true);
+          this.router.navigate(['/timetable']);
+      });
+    });
   }
 
 }

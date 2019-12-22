@@ -12,63 +12,44 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit, OnDestroy {
-  subscription: Subscription;
+  userSubscription: Subscription;
+  registrationSubscription: Subscription;
   showMenu = false;
-  user: firebase.User;
   photoURL: string;
   displayName: string;
   email: string;
 
   ngOnInit() {
     // Get the last user value
-    this.user = this.authService.getUser();
-    if (this.user) {
-      this.showMenu = true;
-      this.displayName = this.displayName;
-      this.photoURL = this.user.photoURL;
-      this.email = this.user.email;
-    }
+    this.userSubscription = this.authService.getUser().subscribe((user) => {
+      if (user != null) {
+        this.displayName = user.displayName;
+        this.photoURL = user.photoURL;
+        this.email = user.email;
+      }
+    });
+
+    // Get the last status value
+    this.registrationSubscription = this.authService.getRegistrationCompleted().subscribe((registrationCompleted) => {
+      this.showMenu = registrationCompleted;
+    });
   }
 
-  constructor(public dialog: MatDialog, private authService: AuthService, private router: Router) {
-      // Get the last user value
-      this.user = this.authService.getUser();
-      // subscribe to auth component messages
-      this.subscription = this.authService.getMessage().subscribe(message => {
-        if (message) {
-          // set user object
-          this.showMenu = message.showMenu;
-          this.user = message['user'];
-          this.displayName = message.user['displayName'];
-          this.photoURL = message.user['photoURL'];
-          this.email = message.user['email'];
-          this.authService.commitUser(message.user);
-          console.log(this.user);
-        } else {
-          // remove side menu when empty message received
-          this.showMenu = false;
-          this.user = null;
-          this.authService.menuDisplaySettings = false;
-          this.authService.user = null;
-        }
-      });
+  constructor(public dialog: MatDialog, private authService: AuthService, private router: Router) {}
+
+  openDialog() {
+    const dialogRef = this.dialog.open(DialogContentExampleDialog);
+    dialogRef.afterClosed().subscribe(result => {});
+  }
+
+  signOut() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 
   ngOnDestroy() {
       // unsubscribe to ensure no memory leaks
-      this.subscription.unsubscribe();
-  }
-
-  openDialog() {
-    const dialogRef = this.dialog.open(DialogContentExampleDialog);
-    dialogRef.afterClosed().subscribe(result => {
-    });
-  }
-
-  signOut() {
-    this.showMenu = false;
-    this.user = null;
-    this.authService.logout();
-    this.router.navigate(['/login']);
+      this.userSubscription.unsubscribe();
+      this.registrationSubscription.unsubscribe();
   }
 }

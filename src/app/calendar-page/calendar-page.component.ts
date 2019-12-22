@@ -16,11 +16,11 @@ import {
   View
 } from '@syncfusion/ej2-angular-schedule';
 import { DateTimePicker } from '@syncfusion/ej2-calendars';
-import { scheduleData } from './data';
 import { DropDownList } from '@syncfusion/ej2-dropdowns';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-calendar-page',
@@ -35,7 +35,7 @@ export class CalendarPageComponent implements OnInit {
   public scheduleHours: WorkHoursModel = { highlight: true, start: '08:00', end: '20:00' };
   public selectedDate: Date = new Date();
   public weekNumber = this.computeWeek();
-  public eventSettings: EventSettingsModel = { dataSource: <Object[]>extend([], scheduleData.University, null, true) };
+  public eventSettings: EventSettingsModel = { dataSource: <Object[]>extend([], [], null, true) };
   public currentView: View = 'Week';
   public currentActivityType: String = 'University';
   public activityTypes = ['University', 'Personal', 'Combined']
@@ -51,58 +51,126 @@ export class CalendarPageComponent implements OnInit {
   public switchWeekOptions = ['Next week', 'Previous week']
   public switchWeekIndex = 0;
   public switchWeek: string = this.switchWeekOptions[this.switchWeekIndex];
+  public mapDaysDates;
+  public RAWtimetable;
+  public user;
 
-  delay(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+  userSubscription: Subscription;
+  statusSubscription: Subscription;
+
+  generateActivityObject(activity, day, activityNo) {
+    const startTime = new Date(this.mapDaysDates.get(day.toString()) as Date);
+    startTime.setTime(startTime.setHours(activity.start_time.split(':')[0] as number));
+
+    const endTime = new Date(this.mapDaysDates.get(day.toString()) as Date);
+    endTime.setTime(endTime.setHours(activity.start_time.split(':')[0] as number));
+    endTime.setTime(endTime.getTime() + (activity.duration * 60 * 60 * 1000));
+
+    return {
+      Id: activityNo,
+      Subject: activity.title,
+      Location: activity.location,
+      StartTime: startTime,
+      EndTime: endTime,
+      Type: activity.type,
+      CategoryColor: 'not set'
+    };
   }
 
-  constructor(private http: HttpClient, private authService: AuthService, private router: Router) {
-    // aici e buba!!
-    if (!this.authService.user) {
-      this.delay(3000).then(() => {
-        const username = this.authService.user.email.split('@')[0];
-        this.http.get('https://timetable.epixmobile.ro/schedule/save_last/' + username).subscribe(
-          (response) => {
-            console.log(response);
-            const a = this.scheduleObj.getCurrentViewDates();
-            let toto = {
-              University: [],
-              Personal: []
-            }
-            let dayName = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
-            let k = 0;
+  parseuniversityActivitiesForWeek(week) {
+    const universityActivities = [];
 
-            for (let j = 0; j < 5; j++) {
-              for (let t = 0; t < Object.keys(response['school']['1'][dayName[j]]).length; t++) {
-
-                let start_time = new Date(a[j] as Date);
-                start_time.setTime(start_time.setHours(response['school']['1'][dayName[j]][t]['start_time'].split(':')[0] as number));
-
-                let end_time = new Date(a[j] as Date);
-                end_time.setTime(end_time.setHours(response['school']['1'][dayName[j]][t]['start_time'].split(':')[0] as number));
-                end_time.setTime(end_time.getTime() + (response['school']['1'][dayName[j]][t]['duration'] * 60 * 60 * 1000));
-
-                let activity = {
-                  Id: k,
-                  Subject: response['school']['1'][dayName[j]][t]['title'],
-                  Location: response['school']['1'][dayName[j]][t]['location'],
-                  StartTime: start_time,
-                  EndTime: end_time,
-                  CategoryColor: 'red'
-                };
-
-                toto.University.push(activity);
-                k++;
-              }
-            }
-            this.scheduleObj.eventSettings.dataSource = <Object[]>extend([], toto.University, null, true);
-          }, (error) => { console.log('error', error); }
-        );
-      });
+    let activitiesNo = 0;
+    for (const day of Object.keys(week)) {
+      // console.log(day);
+      for (const hour of Object.keys(week[day])) {
+        let activity = week[day][hour];
+        // console.log(activity);
+        if (activity != null) {
+          // Deduplication process takes place here.
+          if (universityActivities.length === 0) {
+            activitiesNo += 1;
+            activity = this.generateActivityObject(activity, day, activitiesNo);
+            universityActivities.push(activity);
+          } else if (activity.title !== universityActivities[universityActivities.length - 1].Subject ||
+            activity.type !== universityActivities[universityActivities.length - 1].Type) {
+            activitiesNo += 1;
+            activity = this.generateActivityObject(activity, day, activitiesNo);
+            universityActivities.push(activity);
+          }
+        }
+      }
     }
+
+    return universityActivities;
   }
+
+  getUniversityActicities() {
+    // Map a given day of the week to a precise date.
+    const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+    const currentDisplayedDates: Date[] = this.scheduleObj.getCurrentViewDates() as Date[];
+    this.mapDaysDates = new Map();
+
+    // Get the current displayed dates.
+    for (let itDates = 0; itDates < currentDisplayedDates.length; itDates++) {
+      this.mapDaysDates.set(weekDays[itDates], currentDisplayedDates[itDates]);
+    }
+
+    // Get the activities.
+    const oddWeek = this.parseuniversityActivitiesForWeek(this.RAWtimetable['school']['1']);
+
+    // Update the dates for the next week.
+    this.mapDaysDates = new Map();
+
+    // Get the activities.
+    for (let itDates = 0; itDates < currentDisplayedDates.length; itDates++) {
+      this.mapDaysDates.set(weekDays[itDates], new Date(currentDisplayedDates[itDates].getTime() + (7 * 24 * 60 * 60 * 1000)));
+    }
+    const evenWeek = this.parseuniversityActivitiesForWeek(this.RAWtimetable['school']['2']);
+
+    // Concatenate the results and update the model.
+    const allActivities = [].concat(oddWeek).concat(evenWeek);
+    return allActivities;
+  }
+
+  setTimetableOnAllActivities() {
+    const allActivities = this.getUniversityActicities();
+    // allActivities.concat(this.getUniversityActicities());
+    this.scheduleObj.eventSettings.dataSource = extend([], allActivities, null, true) as object[];
+  }
+
+  setTimetableOnUniversityActivities() {
+    const allActivities = this.getUniversityActicities();
+    // allActivities.concat(this.getUniversityActicities());
+    this.scheduleObj.eventSettings.dataSource = extend([], allActivities, null, true) as object[];
+  }
+
+  setTimetableOnPersonalActivities() {
+    // const allActivities = this.getUniversityActicities();
+    // allActivities.concat(this.getUniversityActicities());
+    this.scheduleObj.eventSettings.dataSource = extend([], [], null, true) as object[];
+  }
+
+  getRAWtimetable() {
+    const username = this.user.email.split('@')[0];
+    this.http.get('https://timetable.epixmobile.ro/schedule/save_last/' + username).subscribe(
+      (response) => {
+        this.RAWtimetable = response;
+        this.setTimetableOnAllActivities();
+      }, (error) => { console.log('error', error); }
+    );
+  }
+
+  constructor(private http: HttpClient, private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
+    // Get the last user value
+    this.userSubscription = this.authService.getUser().subscribe((user) => {
+      if (user != null) {
+        this.user = user;
+        this.getRAWtimetable();
+      }
+    });
   }
 
   public onExportClick(): void {
@@ -116,19 +184,19 @@ export class CalendarPageComponent implements OnInit {
 
   public radioGroupView() {
     if (this.currentActivityType === 'University') {
-      this.scheduleObj.eventSettings.dataSource = scheduleData.University;
+      this.setTimetableOnUniversityActivities();
     } else if (this.currentActivityType === 'Personal') {
-      this.scheduleObj.eventSettings.dataSource = scheduleData.Personal;
+      this.setTimetableOnPersonalActivities();
     } else {
-      this.scheduleObj.eventSettings.dataSource = scheduleData.All;
+      this.setTimetableOnAllActivities();
     }
   }
 
   public computeWeek() {
     // First month is determined by 0.
-    var startDate = new Date(2019, 8, 30);
-    var diff = Math.abs(this.selectedDate.getTime() - startDate.getTime());
-    var diffDays = Math.ceil(diff / (1000 * 3600 * 24));
+    const startDate = new Date(2019, 8, 30);
+    const diff = Math.abs(this.selectedDate.getTime() - startDate.getTime());
+    const diffDays = Math.ceil(diff / (1000 * 3600 * 24));
     return Math.ceil(diffDays / 7);
   }
 
@@ -147,23 +215,23 @@ export class CalendarPageComponent implements OnInit {
 
   onPopupOpen(args: PopupOpenEventArgs): void {
     if (args.type === 'Editor') {
-      let statusElement: HTMLInputElement = args.element.querySelector('#PriorityType') as HTMLInputElement;
+      const statusElement: HTMLInputElement = args.element.querySelector('#PriorityType') as HTMLInputElement;
       if (!statusElement.classList.contains('e-dropdownlist')) {
-        let dropDownListObject: DropDownList = new DropDownList({
+        const dropDownListObject: DropDownList = new DropDownList({
           placeholder: 'Activity priority', value: statusElement.value,
           dataSource: ['Low', 'Medium', 'High']
         });
         dropDownListObject.appendTo(statusElement);
         statusElement.setAttribute('name', 'PriorityType');
       }
-      let startElement: HTMLInputElement = args.element.querySelector('#StartTime') as HTMLInputElement;
-      if (!startElement.classList.contains('e-datetimepicker')) {
-        new DateTimePicker({ value: new Date(startElement.value) || new Date() }, startElement);
-      }
-      let endElement: HTMLInputElement = args.element.querySelector('#EndTime') as HTMLInputElement;
-      if (!endElement.classList.contains('e-datetimepicker')) {
-        new DateTimePicker({ value: new Date(endElement.value) || new Date() }, endElement);
-      }
+      // const startElement: HTMLInputElement = args.element.querySelector('#StartTime') as HTMLInputElement;
+      // if (!startElement.classList.contains('e-datetimepicker')) {
+      //   new DateTimePicker({ value: new Date(startElement.value) || new Date() }, startElement);
+      // }
+      // const endElement: HTMLInputElement = args.element.querySelector('#EndTime') as HTMLInputElement;
+      // if (!endElement.classList.contains('e-datetimepicker')) {
+      //   new DateTimePicker({ value: new Date(endElement.value) || new Date() }, endElement);
+      // }
     }
   }
 }

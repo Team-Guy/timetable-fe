@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase';
 
@@ -8,72 +8,47 @@ import { auth } from 'firebase';
 })
 export class AuthService {
 
+  googleAuthProvider = new auth.GoogleAuthProvider();
+  user = new BehaviorSubject<firebase.User>(null);
+  status = new BehaviorSubject<boolean>(false);
+  registrationCompleted = new BehaviorSubject<boolean>(false);
+
   constructor(private firebase: AngularFireAuth) {
     this.firebase.authState.subscribe(firebaseUser => {
       if (firebaseUser != null) {
-        this.user = firebaseUser;
-        this.subject.next({showMenu: true, user: firebaseUser});
-      } else {
-        // ...
+        this.registrationCompleted.next(true);
+        this.user.next(firebaseUser);
       }
     });
   }
 
-  private subject = new Subject<any>();
-  googleAuthProvider = new auth.GoogleAuthProvider();
-  user: any;
-  menuDisplaySettings = false;
-  isNewUser = false;
-
-  sendMessage(json) {
-      this.subject.next(json);
+  getUser(): Observable<any> {
+      return this.user.asObservable();
   }
 
-  clearMessages() {
-      this.subject.next();
+  getStatus(): Observable<any> {
+    return this.status.asObservable();
   }
 
-  getMessage(): Observable<any> {
-      return this.subject.asObservable();
-  }
-
-  commitUser(user) {
-    this.user = user;
-  }
-
-  getUser() {
-    return this.user;
-  }
-
-  commitMenuDisplaySettings(menuDisplaySettings) {
-    this.menuDisplaySettings = menuDisplaySettings;
-  }
-
-  getMenuDisplaySettings() {
-    return this.menuDisplaySettings;
-  }
-
-  skipRegister(): boolean {
-    return this.menuDisplaySettings;
+  getRegistrationCompleted(): Observable<any> {
+    return this.registrationCompleted.asObservable();
   }
 
   login() {
     this.firebase.auth.signInWithPopup(this.googleAuthProvider).then((result) => {
-      this.isNewUser = result.additionalUserInfo.isNewUser;
-      this.user = result.user;
+      this.status.next(result.additionalUserInfo.isNewUser);
+      this.user.next(result.user);
     }).catch((error) => {
-      // Handle Errors here.
       console.log('error', error);
     });
   }
 
   logout() {
     this.firebase.auth.signOut().then((result) => {
-      // Sign-out successful.
+      // Success.
     }, (error) => {
       // An error happened.
     });
-    this.menuDisplaySettings = false;
-    this.user = null;
+    this.registrationCompleted.next(false);
   }
 }
