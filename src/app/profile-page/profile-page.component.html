@@ -12,9 +12,9 @@
             <mat-panel-title>
               Personal data
             </mat-panel-title>
-            <mat-panel-description>
+            <!-- <mat-panel-description>
               Type your group.
-            </mat-panel-description>
+            </mat-panel-description> -->
           </mat-expansion-panel-header>
           <form class="flex flex-col this-form">
             <mat-form-field class="text-full-width info">
@@ -34,9 +34,9 @@
             <mat-panel-title>
               Optional courses
             </mat-panel-title>
-            <mat-panel-description>
+            <!-- <mat-panel-description>
               Select yours.
-            </mat-panel-description>
+            </mat-panel-description> -->
           </mat-expansion-panel-header>
           <form class="flex flex-col this-form">
             <mat-form-field class="text-full-width topinfo">
@@ -62,9 +62,9 @@
             <mat-panel-title>
               Additional information
             </mat-panel-title>
-            <mat-panel-description>
+            <!-- <mat-panel-description>
               Decide what's important to you.
-            </mat-panel-description>
+            </mat-panel-description> -->
           </mat-expansion-panel-header>
           <form class="flex flex-col this-form">
             <mat-checkbox class="flex flex-row flex-horizontal-center" [(ngModel)]="sport" name="sport">Sport class</mat-checkbox>
@@ -73,7 +73,10 @@
         </mat-expansion-panel>
       </mat-accordion>
       <div class="flex flex-row commit-btn">
-        <button mat-flat-button id="btnCommit" (click)="_submit()">Save</button>
+        <button mat-flat-button id="btnCommit" (click)="_submit()" [disabled]="submitWasHitted">
+          <mat-spinner *ngIf="submitWasHitted" style="margin: 5px 0 5px 0;" [diameter]="30"></mat-spinner>
+          <span *ngIf="!submitWasHitted" style="margin: 5px 0 5px 0;"> Save </span>
+        </button>
       </div>
     </div>
   </div>

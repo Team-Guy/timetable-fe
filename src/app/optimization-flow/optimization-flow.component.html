@@ -1,29 +1,132 @@
-<div style="background-color: rgba(142, 184, 229, 1); height: 100vh;">
-  <mat-horizontal-stepper class="flow" style="background-color: rgba(142, 184, 229, 1); color: black;" [linear]="true" #stepper>
+<div style="background-color: white; color: black; height: 100vh;">
+  <mat-horizontal-stepper class="flow" [linear]="true" #stepper>
     <mat-step [stepControl]="firstFormGroup" disableRipple="true">
       <ng-template matStepLabel>Preferences</ng-template>
-      <form [formGroup]="firstFormGroup">
-        <div class="in-stepper">
-          <div class="flex flex-col">
-            <button mat-button>Add preference</button>
-          </div>
-        </div>
-        <div class="flex flex-row flex-horizontal-center butoane">
-          <button class="nextBtn" mat-button matStepperNext>Next</button>
-          <button class="readMore" mat-button (click)="openDialog()">Not sure? Read more</button>
-        </div>
+      <form [formGroup]="firstFormGroup" class="flex flex-col flex-vertical-center">
+
+        <mat-accordion style="width: 80%">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Monday
+              </mat-panel-title>
+              <mat-panel-description>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <form class="flex flex-col">
+              <mat-form-field>
+                <input matInput placeholder="Start hour" [(ngModel)]="monsd" name="monsd">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="End hour" [(ngModel)]="moned" name="moned">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Max hours" [(ngModel)]="monmh" name="monmh">
+              </mat-form-field>
+            </form>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Tuesday
+              </mat-panel-title>
+              <mat-panel-description>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <form class="flex flex-col">
+              <mat-form-field>
+                <input matInput placeholder="Start hour" [(ngModel)]="tuesd" name="tuesd">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="End hour" [(ngModel)]="tueed" name="tueed">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Max hours" [(ngModel)]="tuemh" name="tuemh">
+              </mat-form-field>
+            </form>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Wednesday
+              </mat-panel-title>
+              <mat-panel-description>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <form class="flex flex-col">
+              <mat-form-field>
+                <input matInput placeholder="Start hour" [(ngModel)]="wedsd" name="wedsd">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="End hour" [(ngModel)]="weded" name="weded">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Max hours" [(ngModel)]="wedmh" name="wedmh">
+              </mat-form-field>
+            </form>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Thursday
+              </mat-panel-title>
+              <mat-panel-description>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <form class="flex flex-col">
+              <mat-form-field>
+                <input matInput placeholder="Start hour" [(ngModel)]="thusd" name="thusd">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="End hour" [(ngModel)]="thued" name="thued">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Max hours" [(ngModel)]="thumh" name="thumh">
+              </mat-form-field>
+            </form>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Friday
+              </mat-panel-title>
+              <mat-panel-description>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <form class="flex flex-col">
+              <mat-form-field>
+                <input matInput placeholder="Start hour" [(ngModel)]="frisd" name="frisd">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="End hour" [(ngModel)]="fried" name="fried">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Max hours" [(ngModel)]="frimh" name="frimh">
+              </mat-form-field>
+            </form>
+          </mat-expansion-panel>
+        </mat-accordion>
       </form>
+
+      <div class="flex flex-row flex-horizontal-center butoane" style="margin-right: 10%">
+        <button class="nextBtn" mat-button matStepperNext>Next</button>
+        <button class="readMore" style="margin-left: 5px;" mat-button routerLink="/timetable">Abort</button>
+      </div>
     </mat-step>
     <mat-step [stepControl]="secondFormGroup">
       <ng-template matStepLabel>Algorithm</ng-template>
       <form [formGroup]="secondFormGroup">
         <div class="in-stepper flex flex-col flex-vertical-center">
           <h4 class="connect-header" style="margin-bottom: 0;">We are now connecting the dots.</h4>
-          <p style="font-size: 15px;">This step might take a few minutes. Please be patient! </p>
-          <img src="../assets/img/server-room.jpg">
+          <h4 style="font-size: 15px; margin-top: 5px">This step might take a few minutes. Please be patient! </h4>
+          <img src="../assets/img/server-room.png">
         </div>
         <div class="flex flex-row flex-horizontal-center butoane">
-          <button mat-raised-button style="background-color: rgb(19, 60, 85)" matStepperNext>
+          <button class="nextBtn" mat-raised-button matStepperNext>
             <mat-spinner [diameter]="30"></mat-spinner>
           </button>
           <button class="readMore" style="margin-left: 5px;" mat-button routerLink="/timetable">Abort</button>
@@ -32,20 +135,24 @@
     </mat-step>
     <mat-step>
         <ng-template matStepLabel>Overview</ng-template>
-        <div class="in-stepper">
-          <mat-list>
+        <div class="flex flex-col flex-vertical-center">
+          <mat-list style="width: 80%;">
               <h3 mat-subheader>Changed</h3>
               <mat-list-item *ngFor="let folder of folders">
                 <mat-icon mat-list-icon>done_outline</mat-icon>
-                <h4 mat-line>{{folder.name}}</h4>
-                <p mat-line> {{folder.updated | date}} </p>
+                <p mat-line>{{folder.name}}</p>
+                <p mat-line> {{folder.type}} </p>
+                <p mat-line> From: <b>{{folder.initialDate | date}}</b> at <b>12am</b> <br>
+                  To: <b>{{folder.finalDate | date}}</b> at <b>14am</b> </p>
               </mat-list-item>
               <mat-divider></mat-divider>
               <h3 mat-subheader>Unable to satisfy your preferences</h3>
               <mat-list-item *ngFor="let note of notes">
                 <mat-icon mat-list-icon>feedback</mat-icon>
-                <h4 mat-line>{{note.name}}</h4>
-                <p mat-line> {{note.updated | date}} </p>
+                <p style="float: left;" mat-line>{{note.name}}</p>
+                <p mat-line> {{note.type}} </p>
+                <p mat-line> {{note.initialDate | date}} </p>
+                <p mat-line> {{note.reason}} </p>
               </mat-list-item>
           </mat-list>
         </div>

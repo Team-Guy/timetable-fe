@@ -25,6 +25,7 @@ export class SelectGroupPageComponent implements OnInit {
   secondSemesterOptList: string[];
   user;
   statusSubscription: Subscription;
+  setWasHitted = false;
 
 
   constructor(
@@ -39,7 +40,11 @@ export class SelectGroupPageComponent implements OnInit {
 
       // Skip this page if the user is already registered.
       if (status === false) {
-        this.router.navigate(['/timetable']);
+        this.authService.getRegistrationCompleted().subscribe((registrationCompleted) => {
+          if (registrationCompleted === true) {
+            this.router.navigate(['/timetable']);
+          }
+        });
       }
     });
 
@@ -87,6 +92,7 @@ export class SelectGroupPageComponent implements OnInit {
   }
 
   async set() {
+    this.setWasHitted = true;
     const username = this.user.email.split('@')[0];
 
     // The following console.log() has debug purposes.
@@ -127,6 +133,7 @@ export class SelectGroupPageComponent implements OnInit {
 
       authOptionalUsernameResponse.then((response) => {
           console.log(response);
+          this.authService.registrationCompleted.next(true);
           this.authService.status.next(true);
           this.router.navigate(['/timetable']);
       });

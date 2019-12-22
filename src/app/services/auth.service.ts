@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase';
+import { HttpClient } from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +15,19 @@ export class AuthService {
   status = new BehaviorSubject<boolean>(false);
   registrationCompleted = new BehaviorSubject<boolean>(false);
 
-  constructor(private firebase: AngularFireAuth) {
+  constructor(
+    private firebase: AngularFireAuth,
+    private http: HttpClient) {
     this.firebase.authState.subscribe(firebaseUser => {
       if (firebaseUser != null) {
-        this.registrationCompleted.next(true);
         this.user.next(firebaseUser);
+        const promise = this.http.get('https://timetable.epixmobile.ro/auth/edit/' + firebaseUser.email.split('@')[0]).toPromise();
+        promise.then(
+          (response) => {
+            if (response['group'] != null) {
+              this.registrationCompleted.next(true);
+            }
+          });
       }
     });
   }

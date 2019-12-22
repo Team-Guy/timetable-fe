@@ -28,11 +28,14 @@
           </mat-select>
         </mat-form-field>
       </form>
-      <button mat-raised-button class="button-select" (click)="set()">Set</button>
+      <button mat-raised-button class="button-select" (click)="set()" [disabled]="setWasHitted">
+        <mat-spinner *ngIf="setWasHitted" style="margin: 5px 0 5px 0;" [diameter]="30"></mat-spinner>
+        <span *ngIf="!setWasHitted" style="margin: 5px 0 5px 0;"> Set </span>
+      </button>
   </div>
 
 
-  <div class="flex flex-row flex-horizontal-center">
+  <div class="flex flex-row flex-horizontal-center" style="z-index: -1">
     <img id="student-image" src="../../assets/img/groupselect.png"/>
   </div>
 

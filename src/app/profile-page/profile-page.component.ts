@@ -26,6 +26,7 @@ export class ProfilePageComponent implements OnInit {
   sport = false;
   peda = false;
   yearOfStudy = 3;
+  public submitWasHitted = false;
 
   constructor(
     private authService: AuthService,
@@ -34,35 +35,46 @@ export class ProfilePageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.user = this.authService.getUser();
-    const username = this.user.email.split('@')[0];
-    this.http.get('https://timetable.epixmobile.ro/schedule/groups/').subscribe(
-      (response) => {
-        this.options = response;
-        this.filteredOptions = this.myControl.valueChanges.pipe(
-          startWith(''),
-          map(value => this._filter(value))
+    this.authService.getUser().subscribe((user) => {
+      if (user != null) {
+        this.user = user;
+        const username = user.email.split('@')[0];
+        this.http.get('https://timetable.epixmobile.ro/schedule/groups/').subscribe(
+          (response) => {
+            this.options = response;
+            this.filteredOptions = this.myControl.valueChanges.pipe(
+              startWith(''),
+              map(value => this._filter(value))
+            );
+          }
+        );
+
+        const promise = this.http.get('https://timetable.epixmobile.ro/auth/edit/' + username).toPromise();
+        promise.then(
+          (response) => {
+            this.group = response['group'];
+            this.sport = response['sport'];
+            this.peda = response['peda'];
+            this.optional1 = response['optionals'];
+            console.log('user optionals for 1st semester:', this.optional1);
+
+            this.yearOfStudy = Number(this.group[1]);
+            this.http.get('https://timetable.epixmobile.ro/auth/optionals/semester/' + this.yearOfStudy * 2).subscribe(
+              (semester1Response) => {
+                this.optionalList2 = semester1Response;
+                console.log('1st sem opts', semester1Response);
+              }
+            );
+            this.http.get('https://timetable.epixmobile.ro/auth/optionals/semester/' + (this.yearOfStudy * 2 - 1)).subscribe(
+              (semester2Response) => {
+                this.optionalList1 = semester2Response;
+                console.log('2nd sem opts', semester2Response);
+              }
+            );
+          }
         );
       }
-    );
-    this.http.get('https://timetable.epixmobile.ro/auth/optionals/semester/' + this.yearOfStudy * 2).subscribe(
-      (response) => {
-        this.optionalList2 = response;
-      }
-    );
-    this.http.get('https://timetable.epixmobile.ro/auth/optionals/semester/' + (this.yearOfStudy * 2 - 1)).subscribe(
-      (response) => {
-        this.optionalList1 = response;
-      }
-    );
-    this.http.get('https://timetable.epixmobile.ro/auth/edit/' + username).subscribe(
-      (response) => {
-        this.group = response['group'];
-        this.sport = response['sport'];
-        this.peda = response['peda'];
-        this.optional1 = response['optionals'];
-      }
-    );
+    });
   }
 
   _filter(value: string): string[] {
@@ -75,7 +87,7 @@ export class ProfilePageComponent implements OnInit {
   }
 
   _submit() {
-    this.user = this.authService.getUser();
+    this.submitWasHitted = true;
     const username = this.user.email.split('@')[0];
     const allopts = this.optional1.concat(this.optional2);
     const payload = {
@@ -83,7 +95,8 @@ export class ProfilePageComponent implements OnInit {
       sport: this._capitalize(this.sport.toString()),
       peda: this._capitalize(this.peda.toString()),
       optionals: allopts
-    }
+    };
+
     const promise = this.http.post('https://timetable.epixmobile.ro/auth/edit/' + username, payload).toPromise();
     promise.then(
       (response) => {

@@ -8,8 +8,9 @@ div {width: 100vw;}
 }
 
 #export-btn {
-    background-color: rgb(19, 60, 85);
-    color: white;
+  width: 100%;
+  background-color: rgb(19, 60, 85);
+  color: white;
 }
 
 #week{
@@ -23,6 +24,7 @@ div {width: 100vw;}
     width: 100%;
     font-weight: 450;
     overflow-x: hidden !important;
+    background-color: rgba(124, 210, 193);
 }
 
 #btn-switch-week {
@@ -93,4 +95,41 @@ div {width: 100vw;}
 
 /deep/ .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
   background-color: rgb(19, 60, 85) !important;
+}
+
+.schedule {
+  margin-right: 5rem;
+  border-radius: 5px;
+}
+
+@media only screen and (max-width: 880px) {
+  .scroll-container{
+    margin: 1rem 0 0 0;
+    width: 90%;
+    max-width: 90%;
+    max-height: 100%;
+  }
+
+  .schedule {
+    margin-right: 5%;
+    margin-left: 5%;
+    border-radius: 5px;
+  }
+
+  #week{
+    margin: 2.4rem 0 0 5%;
+    font-size: 1.138em;
+}
+
+  .menu-and-calendar{
+    flex-wrap: wrap-reverse;
+  }
+
+  #btnGenerate{
+    margin: 0.5rem 0 0 0;
+  }
+
+  #btn-switch-week {
+    margin: 0.5rem 0 0 0;
+  }
 }

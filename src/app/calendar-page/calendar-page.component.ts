@@ -35,9 +35,9 @@ export class CalendarPageComponent implements OnInit {
   public scheduleHours: WorkHoursModel = { highlight: true, start: '08:00', end: '20:00' };
   public selectedDate: Date = new Date();
   public weekNumber = this.computeWeek();
-  public eventSettings: EventSettingsModel = { dataSource: <Object[]>extend([], [], null, true) };
+  public eventSettings: EventSettingsModel = { dataSource: extend([], [], null, true) as object[] };
   public currentView: View = 'Week';
-  public currentActivityType: String = 'University';
+  public currentActivityType = 'University';
   public activityTypes = ['University', 'Personal', 'Combined']
   public setViews: View[] = ['WorkWeek', 'Day', 'TimelineDay', 'Agenda'];
   public viewTypes = [
@@ -58,7 +58,7 @@ export class CalendarPageComponent implements OnInit {
   userSubscription: Subscription;
   statusSubscription: Subscription;
 
-  generateActivityObject(activity, day, activityNo) {
+  generateUniversityActivityObject(activity, day, activityNo) {
     const startTime = new Date(this.mapDaysDates.get(day.toString()) as Date);
     startTime.setTime(startTime.setHours(activity.start_time.split(':')[0] as number));
 
@@ -73,6 +73,7 @@ export class CalendarPageComponent implements OnInit {
       StartTime: startTime,
       EndTime: endTime,
       Type: activity.type,
+      IsReadonly: true,
       CategoryColor: 'not set'
     };
   }
@@ -90,12 +91,12 @@ export class CalendarPageComponent implements OnInit {
           // Deduplication process takes place here.
           if (universityActivities.length === 0) {
             activitiesNo += 1;
-            activity = this.generateActivityObject(activity, day, activitiesNo);
+            activity = this.generateUniversityActivityObject(activity, day, activitiesNo);
             universityActivities.push(activity);
           } else if (activity.title !== universityActivities[universityActivities.length - 1].Subject ||
             activity.type !== universityActivities[universityActivities.length - 1].Type) {
             activitiesNo += 1;
-            activity = this.generateActivityObject(activity, day, activitiesNo);
+            activity = this.generateUniversityActivityObject(activity, day, activitiesNo);
             universityActivities.push(activity);
           }
         }
@@ -224,14 +225,14 @@ export class CalendarPageComponent implements OnInit {
         dropDownListObject.appendTo(statusElement);
         statusElement.setAttribute('name', 'PriorityType');
       }
-      // const startElement: HTMLInputElement = args.element.querySelector('#StartTime') as HTMLInputElement;
-      // if (!startElement.classList.contains('e-datetimepicker')) {
-      //   new DateTimePicker({ value: new Date(startElement.value) || new Date() }, startElement);
-      // }
-      // const endElement: HTMLInputElement = args.element.querySelector('#EndTime') as HTMLInputElement;
-      // if (!endElement.classList.contains('e-datetimepicker')) {
-      //   new DateTimePicker({ value: new Date(endElement.value) || new Date() }, endElement);
-      // }
+      const startElement: HTMLInputElement = args.element.querySelector('#StartTime') as HTMLInputElement;
+      if (!startElement.classList.contains('e-datetimepicker')) {
+        new DateTimePicker({ value: new Date(startElement.value) || new Date() }, startElement);
+      }
+      const endElement: HTMLInputElement = args.element.querySelector('#EndTime') as HTMLInputElement;
+      if (!endElement.classList.contains('e-datetimepicker')) {
+        new DateTimePicker({ value: new Date(endElement.value) || new Date() }, endElement);
+      }
     }
   }
 }

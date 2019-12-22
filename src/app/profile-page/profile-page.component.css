@@ -14,9 +14,9 @@
 }
 
 #btnCommit{
-    background-color: rgb(70, 92, 70);
-    color: white;
-    margin: 0 0.1rem 0 0;
+  background-color: rgb(19, 60, 85);;
+  color: white;
+  margin: 0 0.1rem 0 0;
 }
 
 #btnLogout{
@@ -85,3 +85,7 @@
 /* /deep/ body {
     background-color: white;
 } */
+
+/deep/ mat-spinner circle, .mat-spinner circle {
+  stroke: white !important;
+}

@@ -1,4 +1,4 @@
-<div style="background-color: rgba(142, 184, 229, 0.4); color: black; padding-bottom: 5rem; z-index: -1;">
+<div style="background-color: rgba(178, 199, 209, 0.7); color: black; padding-bottom: 5rem; z-index: -1;">
   <div id="weekNbutton" class="flex flex-row flex-horizontal-center">
     <div id="week" style="color: rgb(19, 60, 85)">
      <strong> Week {{ weekNumber }}</strong>
@@ -55,8 +55,28 @@
             </mat-panel-title>
           </mat-expansion-panel-header>
           <button mat-flat-button id="export-btn" (click)="download()">
-            <mat-icon mat-list-icon>attachment</mat-icon>
+            <img src="../../assets/img/export.png" style="height: 20px; width: 20px; margin: -3px 3px 0 -5px;">
             XML
+          </button>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Actions
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <button mat-flat-button id="export-btn" style="margin: 0 0 10px 0">
+            <img src="../../assets/img/save.png" style="height: 23px; width: 23px; margin: -3px 3px 0 0;">
+            Save changes
+          </button>
+          <button mat-flat-button id="export-btn" style="margin: 0 0 10px 0">
+            <img src="../../assets/img/sync.png" style="height: 23px; width: 23px; margin: -3px 3px 0 -5px;">
+            Sync Google
+          </button>
+          <button mat-flat-button id="export-btn">
+            <img src="../../assets/img/opt.png" style="height: 23px; width: 23px; margin: -3px 3px 0 -5px;">
+            Reset
           </button>
         </mat-expansion-panel>
       </mat-accordion>
@@ -67,19 +87,15 @@
         mat-flat-button
         color="warn"
         id="btnGenerate"
-        routerLink="/optimize-schedule"
-      >
-        <mat-icon
-          style="margin-top: -5px;"
-          mat-list-icon
-          style="margin-right: 3px;"
-        ></mat-icon
-        >Optimize schedule
+        routerLink="/optimize-schedule">
+        <img src="../../assets/img/bomb.png" style="height: 20px; width: 20px; margin: -3px 3px 0 0;">
+        Optimize schedule
       </button>
     </div>
+
     <ejs-schedule
       #scheduleObj
-      style="margin-right: 5rem; border-radius: 5px;"
+      class="schedule"
       [selectedDate]="selectedDate"
       [eventSettings]="eventSettings"
       [views]="setViews"

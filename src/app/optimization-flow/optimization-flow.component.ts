@@ -1,10 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {MatDialog} from '@angular/material/dialog';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../services/auth.service';
 
 export interface Section {
   name: string;
-  updated: Date;
+  type: string;
+  reason: string;
+  initialDate: Date;
+  finalDate: Date;
 }
 
 @Component({
@@ -13,37 +18,72 @@ export interface Section {
   styleUrls: ['./optimization-flow.component.css']
 })
 export class OptimizationFlowComponent implements OnInit {
-  public endMessage: String = "";
-  public endMessageDescription: String = "";
+  monsd: string;
+  moned: string;
+  monmh: string;
+  tuesd: string;
+  tueed: string;
+  tuemh: string;
+  wedsd: string;
+  weded: string;
+  wedmh: string;
+  thusd: string;
+  thued: string;
+  thumh: string;
+  frisd: string;
+  fried: string;
+  frimh: string;
+  user: any;
+  userId: string;
+  public endMessage = '';
+  public endMessageDescription = '';
   public folders: Section[] = [
     {
-      name: 'Photos',
-      updated: new Date('1/1/16'),
+      name: 'Realitate virtuala',
+      type: 'Seminar',
+      reason: '',
+      initialDate: new Date('1/1/16'),
+      finalDate: new Date('1/1/16'),
     },
     {
-      name: 'Recipes',
-      updated: new Date('1/17/16'),
+      name: 'Limbaje formale si tehnici de compilare',
+      type: 'Seminar',
+      reason: '',
+      initialDate: new Date('1/17/16'),
+      finalDate: new Date('1/17/16'),
     },
     {
-      name: 'Work',
-      updated: new Date('1/28/16'),
+      name: 'Programare paralele si distribuita',
+      type: 'Laborator',
+      reason: '',
+      initialDate: new Date('1/28/16'),
+      finalDate: new Date('1/28/16'),
     }
   ];
   notes: Section[] = [
     {
-      name: 'Vacation Itinerary',
-      updated: new Date('2/20/16'),
+      name: 'Limbaje formale si tehnici de compilare',
+      type: 'Course',
+      reason: 'Courses cannot be moved',
+      initialDate: new Date('2/20/16'),
+      finalDate: new Date('2/20/16'),
     },
     {
-      name: 'Kitchen Remodel',
-      updated: new Date('1/18/16'),
+      name: 'Programare paralele si distribuita',
+      type: 'Course',
+      reason: 'Courses cannot be moved',
+      initialDate: new Date('1/18/16'),
+      finalDate: new Date('1/18/16'),
     }
   ];
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
 
-  constructor(private _formBuilder: FormBuilder,
-    public dialog: MatDialog) {}
+  constructor(
+    private _formBuilder: FormBuilder,
+    public dialog: MatDialog,
+    private authService: AuthService,
+    private http: HttpClient) {}
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
@@ -52,16 +92,74 @@ export class OptimizationFlowComponent implements OnInit {
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ['']
     });
+    this.foobar();
   }
 
-  userDroppedChanges () {
-    this.endMessageDescription = "Try to read our guidelines in order to get better results.";
-    this.endMessage = "Oh.. it happens. Don't be mad on us!";
+  foobar() {
+    this.authService.getUser().subscribe((user) => {
+      if (user != null) {
+        this.user = user;
+        const username = this.user.email.split('@')[0];
+        this.http.get('https://timetable.epixmobile.ro/auth/preferences/' + username).subscribe(
+          (response) => {
+            console.log(response);
+            this.monsd = response['mondayStart'];
+            this.moned = response['mondayEnd'];
+            this.monmh = response['mondayMax'];
+            this.tuesd = response['tuesdayStart'];
+            this.tueed = response['tuesdayEnd'];
+            this.tuemh = response['tuesdayMax'];
+            this.wedsd = response['wednesdayStart'];
+            this.weded = response['wednesdayEnd'];
+            this.wedmh = response['wednesdayMax'];
+            this.thusd = response['thursdayStart'];
+            this.thued = response['thursdayEnd'];
+            this.thumh = response['thursdayMax'];
+            this.frisd = response['fridayStart'];
+            this.fried = response['fridayEnd'];
+            this.frimh = response['fridayMax'];
+            this.userId = response['id'];
+          }
+        );
+      }
+    });
   }
 
-  userAgreedToChange () {
-    this.endMessageDescription = "";
-    this.endMessage = "Great! We're setting up your schedule.";
+   goToSecondStep() {
+    this.user = this.authService.getUser();
+    const username = this.user.email.split('@')[0];
+    const payload = {
+      id: this.userId,
+      mondayStart: this.monsd,
+      mondayEnd: this.moned,
+      tuesdayStart: this.tuesd,
+      tuesdayEnd: this.tueed,
+      wednesdayStart: this.wedsd,
+      wednesdayEnd: this.weded,
+      thursdayStart: this.thusd,
+      thursdayEnd: this.thued,
+      fridayStart: this.frisd,
+      fridayEnd: this.fried,
+      mondayMax: this.monmh,
+      tuesdayMax: this.tuemh,
+      wednesdayMax: this.wedmh,
+      thursdayMax: this.thumh,
+      fridayMax: this.frimh};
+    this.http.post('https://timetable.epixmobile.ro/auth/preferences/' + username, payload).subscribe(
+      (response) => {
+        console.log(response);
+      }
+    );
+  }
+
+  userDroppedChanges() {
+    this.endMessageDescription = 'Try to read our guidelines in order to get better results.';
+    this.endMessage = 'Oh.. it happens. Don\'t be mad on us!';
+  }
+
+  userAgreedToChange() {
+    this.endMessageDescription = '';
+    this.endMessage = 'Great! We\'re setting up your schedule.';
   }
 
   openDialog() {
