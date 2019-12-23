@@ -7,13 +7,14 @@ import { SelectGroupPageComponent } from './select-group-page/select-group-page.
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { CalendarPageComponent } from './calendar-page/calendar-page.component';
 import { OptimizationFlowComponent } from './optimization-flow/optimization-flow.component';
+import { AuthGuardService } from './guards/auth-guard.service';
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginPageComponent},
-  {path: 'selectgroup', component: SelectGroupPageComponent},
-  {path: 'profile', component: ProfilePageComponent},
-  {path: 'timetable', component: CalendarPageComponent},
-  {path: 'optimize-schedule', component: OptimizationFlowComponent}, 
+  {path: 'selectgroup', component: SelectGroupPageComponent, canActivate: [AuthGuardService]},
+  {path: 'profile', component: ProfilePageComponent, canActivate: [AuthGuardService]},
+  {path: 'timetable', component: CalendarPageComponent, canActivate: [AuthGuardService]},
+  {path: 'optimize-schedule', component: OptimizationFlowComponent, canActivate: [AuthGuardService]},
   {path: '', redirectTo: '/login', pathMatch: 'full'}
 ]
 
@@ -31,13 +32,13 @@ const appRoutes: Routes = [
 })
 
 export class AppRoutingModule {
-  constructor(private router: Router){}
+  constructor(private router: Router) {}
  }
 
 export const routingComponents = [
-  LoginPageComponent, 
-  SelectGroupPageComponent, 
-  CalendarPageComponent, 
+  LoginPageComponent,
+  SelectGroupPageComponent,
+  CalendarPageComponent,
   OptimizationFlowComponent,
   CalendarPageComponent,
   ProfilePageComponent]

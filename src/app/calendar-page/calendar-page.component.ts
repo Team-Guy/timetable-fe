@@ -21,6 +21,8 @@ import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { CalendarService } from '../google/calendar.service';
+
 
 @Component({
   selector: 'app-calendar-page',
@@ -107,6 +109,17 @@ export class CalendarPageComponent implements OnInit {
   }
 
   getUniversityActicities() {
+    // Determine which week is placed first.
+    let firstWeek;
+    let secondWeek;
+    if (this.computeWeek() % 2 === 1) {
+      firstWeek = this.RAWtimetable['school']['1'];
+      secondWeek = this.RAWtimetable['school']['2'];
+    } else {
+      firstWeek = this.RAWtimetable['school']['2'];
+      secondWeek = this.RAWtimetable['school']['1'];
+    }
+
     // Map a given day of the week to a precise date.
     const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
     const currentDisplayedDates: Date[] = this.scheduleObj.getCurrentViewDates() as Date[];
@@ -118,7 +131,7 @@ export class CalendarPageComponent implements OnInit {
     }
 
     // Get the activities.
-    const oddWeek = this.parseuniversityActivitiesForWeek(this.RAWtimetable['school']['1']);
+    const oddWeek = this.parseuniversityActivitiesForWeek(firstWeek);
 
     // Update the dates for the next week.
     this.mapDaysDates = new Map();
@@ -127,7 +140,7 @@ export class CalendarPageComponent implements OnInit {
     for (let itDates = 0; itDates < currentDisplayedDates.length; itDates++) {
       this.mapDaysDates.set(weekDays[itDates], new Date(currentDisplayedDates[itDates].getTime() + (7 * 24 * 60 * 60 * 1000)));
     }
-    const evenWeek = this.parseuniversityActivitiesForWeek(this.RAWtimetable['school']['2']);
+    const evenWeek = this.parseuniversityActivitiesForWeek(secondWeek);
 
     // Concatenate the results and update the model.
     const allActivities = [].concat(oddWeek).concat(evenWeek);
@@ -162,7 +175,11 @@ export class CalendarPageComponent implements OnInit {
     );
   }
 
-  constructor(private http: HttpClient, private authService: AuthService, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService,
+    private router: Router,
+    private auth: CalendarService) {}
 
   ngOnInit() {
     // Get the last user value

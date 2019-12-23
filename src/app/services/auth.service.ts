@@ -21,6 +21,9 @@ export class AuthService {
     this.firebase.authState.subscribe(firebaseUser => {
       if (firebaseUser != null) {
         this.user.next(firebaseUser);
+
+        // To be replaced with a specilized route that serves the only purpose of determining if the
+        // user has already registered or not.
         const promise = this.http.get('https://timetable.epixmobile.ro/auth/edit/' + firebaseUser.email.split('@')[0]).toPromise();
         promise.then(
           (response) => {
