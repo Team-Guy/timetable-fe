@@ -15,14 +15,15 @@ export class ProfilePageComponent implements OnInit {
 
   myControl = new FormControl();
   options: any = [];
-  optionals = new FormControl();
+  optionals1 = new FormControl();
+  optionals2 = new FormControl();
   optionalList1: any;
   optionalList2: any;
   filteredOptions: Observable<string[]>;
   user: any;
   group: string;
-  optional1: string;
-  optional2: string;
+  optional1: any=[];
+  optional2: any=[];
   sport = false;
   peda = false;
   yearOfStudy = 3;
@@ -56,19 +57,19 @@ export class ProfilePageComponent implements OnInit {
             this.sport = response['sport'];
             this.peda = response['peda'];
             this.optional1 = response['optionals'];
-            console.log('user optionals for 1st semester:', this.optional1);
+            // console.log('user optionals for 1st semester:', this.optional1);
 
             this.yearOfStudy = Number(this.group[1]);
             this.http.get('https://timetable.epixmobile.ro/auth/optionals/semester/' + this.yearOfStudy * 2).subscribe(
               (semester1Response) => {
                 this.optionalList2 = semester1Response;
-                console.log('1st sem opts', semester1Response);
+                // console.log('1st sem opts', semester1Response);
               }
             );
             this.http.get('https://timetable.epixmobile.ro/auth/optionals/semester/' + (this.yearOfStudy * 2 - 1)).subscribe(
               (semester2Response) => {
                 this.optionalList1 = semester2Response;
-                console.log('2nd sem opts', semester2Response);
+                // console.log('2nd sem opts', semester2Response);
               }
             );
           }
@@ -88,6 +89,7 @@ export class ProfilePageComponent implements OnInit {
 
   _submit() {
     this.submitWasHitted = true;
+    // console.log(this.optional2);
     const username = this.user.email.split('@')[0];
     const allopts = this.optional1.concat(this.optional2);
     const payload = {
@@ -96,6 +98,8 @@ export class ProfilePageComponent implements OnInit {
       peda: this._capitalize(this.peda.toString()),
       optionals: allopts
     };
+
+    console.log(payload);
 
     const promise = this.http.post('https://timetable.epixmobile.ro/auth/edit/' + username, payload).toPromise();
     promise.then(
@@ -107,3 +111,4 @@ export class ProfilePageComponent implements OnInit {
   }
 
 }
+

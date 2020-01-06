@@ -113,7 +113,7 @@
       </form>
 
       <div class="flex flex-row flex-horizontal-center butoane" style="margin-right: 10%">
-        <button class="nextBtn" mat-button matStepperNext>Next</button>
+        <button class="nextBtn" mat-button matStepperNext (click)="goToSecondStep()">Next</button>
         <button class="readMore" style="margin-left: 5px;" mat-button routerLink="/timetable">Abort</button>
       </div>
     </mat-step>
@@ -126,10 +126,10 @@
           <img src="../assets/img/server-room.png">
         </div>
         <div class="flex flex-row flex-horizontal-center butoane">
-          <button class="nextBtn" mat-raised-button matStepperNext>
+          <button *ngIf="algoDone==false" class="nextBtn" mat-raised-button>
             <mat-spinner [diameter]="30"></mat-spinner>
           </button>
-          <button class="readMore" style="margin-left: 5px;" mat-button routerLink="/timetable">Abort</button>
+          <button *ngIf="algoDone==true" class="nextBtn" mat-raised-button matStepperNext>Next</button>
         </div>
       </form>
     </mat-step>

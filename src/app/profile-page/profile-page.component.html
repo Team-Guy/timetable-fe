@@ -40,7 +40,7 @@
           </mat-expansion-panel-header>
           <form class="flex flex-col this-form">
             <mat-form-field class="text-full-width topinfo">
-              <mat-select placeholder="1st sem" [formControl]="optionals" [(ngModel)]="optional1" multiple>
+              <mat-select placeholder="1st sem" [formControl]="optionals1" [(ngModel)]="optional1" multiple>
                 <mat-option *ngFor="let optional of optionalList1" [value]="optional">
                   {{optional}}
                 </mat-option>
@@ -48,7 +48,7 @@
             </mat-form-field>
 
             <mat-form-field class="text-full-width">
-              <mat-select placeholder="2nd sem" [formControl]="optionals" [(ngModel)]="optional2" multiple>
+              <mat-select placeholder="2nd sem" [formControl]="optionals2" [(ngModel)]="optional2" multiple>
                 <mat-option *ngFor="let optional of optionalList2" [value]="optional">
                   {{optional}}
                 </mat-option>

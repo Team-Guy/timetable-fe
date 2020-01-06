@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
-import { HttpClient } from '@angular/common/http';
-import { AuthService } from '../services/auth.service';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {MatDialog} from '@angular/material/dialog';
+import {HttpClient} from '@angular/common/http';
+import {AuthService} from '../services/auth.service';
 
 export interface Section {
   name: string;
@@ -35,6 +35,8 @@ export class OptimizationFlowComponent implements OnInit {
   frimh: string;
   user: any;
   userId: string;
+  algoDone = false;
+  algoResponse: any;
   public endMessage = '';
   public endMessageDescription = '';
   public folders: Section[] = [
@@ -83,7 +85,8 @@ export class OptimizationFlowComponent implements OnInit {
     private _formBuilder: FormBuilder,
     public dialog: MatDialog,
     private authService: AuthService,
-    private http: HttpClient) {}
+    private http: HttpClient) {
+  }
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
@@ -102,7 +105,7 @@ export class OptimizationFlowComponent implements OnInit {
         const username = this.user.email.split('@')[0];
         this.http.get('https://timetable.epixmobile.ro/auth/preferences/' + username).subscribe(
           (response) => {
-            console.log(response);
+            // console.log(response);
             this.monsd = response['mondayStart'];
             this.moned = response['mondayEnd'];
             this.monmh = response['mondayMax'];
@@ -125,8 +128,8 @@ export class OptimizationFlowComponent implements OnInit {
     });
   }
 
-   goToSecondStep() {
-    this.user = this.authService.getUser();
+  goToSecondStep() {
+
     const username = this.user.email.split('@')[0];
     const payload = {
       id: this.userId,
@@ -144,10 +147,16 @@ export class OptimizationFlowComponent implements OnInit {
       tuesdayMax: this.tuemh,
       wednesdayMax: this.wedmh,
       thursdayMax: this.thumh,
-      fridayMax: this.frimh};
+      fridayMax: this.frimh
+    };
+    console.log(payload);
     this.http.post('https://timetable.epixmobile.ro/auth/preferences/' + username, payload).subscribe(
       (response) => {
-        console.log(response);
+        this.http.get(`https://timetable.epixmobile.ro/schedule/algo/${username}/`).subscribe((response) => {
+          this.algoDone = true;
+          this.algoResponse = response;
+          console.log(this.algoResponse);
+        });
       }
     );
   }
@@ -158,8 +167,21 @@ export class OptimizationFlowComponent implements OnInit {
   }
 
   userAgreedToChange() {
+    const username = this.user.email.split('@')[0];
+    console.log(username);
     this.endMessageDescription = '';
     this.endMessage = 'Great! We\'re setting up your schedule.';
+    const payload={
+      'school': this.algoResponse['school'],
+      'extra': this.algoResponse['extra']
+    };
+    console.log(payload);
+    this.http.post(`https://timetable.epixmobile.ro/schedule/save_last/${username}`, payload).subscribe(result=> {
+      console.log(result);
+    });
+    // this.http.post(`http://localhost:8000/schedule/save_last/${username}`, payload).subscribe(result=> {
+    //   console.log(result);
+    // });
   }
 
   openDialog() {
@@ -169,10 +191,15 @@ export class OptimizationFlowComponent implements OnInit {
       console.log(`Dialog result: ${result}`);
     });
   }
+
+  t() {
+    this.algoDone = true;
+  }
 }
 
 @Component({
   selector: 'dialog-content-example-dialog',
   templateUrl: 'dialog-content-example-dialog.html',
 })
-export class DialogContentExampleDialog {}
+export class DialogContentExampleDialog {
+}
