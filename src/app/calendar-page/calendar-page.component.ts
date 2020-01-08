@@ -398,6 +398,7 @@ export class CalendarPageComponent implements OnInit {
     const post=this.http.post(`https://timetable.epixmobile.ro/schedule/save_extra/${username}`,toSend).toPromise();
     post.then(result=>{
       console.log(result);
+      location.reload();
     })
   }
 
