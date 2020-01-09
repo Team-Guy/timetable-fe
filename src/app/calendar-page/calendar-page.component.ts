@@ -56,6 +56,8 @@ export class CalendarPageComponent implements OnInit {
   public mapDaysDates;
   public RAWtimetable;
   public user;
+  saveDone=true;
+  resetDone=true;
 
   userSubscription: Subscription;
   statusSubscription: Subscription;
@@ -337,6 +339,7 @@ export class CalendarPageComponent implements OnInit {
   }
 
   resetSchedule(): void {
+    this.resetDone=false;
     const username = this.user.email.split('@')[0];
     //console.log(username);
     const extraPromise=this.http.post(`https://timetable.epixmobile.ro/schedule/save_extra/${username}`,[]).toPromise();
@@ -358,7 +361,9 @@ export class CalendarPageComponent implements OnInit {
             optionals:r["optionals"]
           }).toPromise();
           fPromise.then(_=>{
-            location.reload();
+            this.getRAWtimetable();
+            this.currentActivityType = 'Combined';
+            this.resetDone=true;
           });
         });
       });
@@ -367,6 +372,7 @@ export class CalendarPageComponent implements OnInit {
 
   saveExtras() {
 
+    this.saveDone=false;
     const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
     const freq=['par','impar'];
     const extras=[];
@@ -398,7 +404,9 @@ export class CalendarPageComponent implements OnInit {
     const post=this.http.post(`https://timetable.epixmobile.ro/schedule/save_extra/${username}`,toSend).toPromise();
     post.then(result=>{
       console.log(result);
-      location.reload();
+      this.getRAWtimetable();
+      this.currentActivityType = 'Combined';
+      this.saveDone=true;
     })
   }
 
