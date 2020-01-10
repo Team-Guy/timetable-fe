@@ -103,8 +103,12 @@ div {width: 100vw;}
 }
 
 .nextBtn{
-  background-color: rgb(19, 60, 85);;
+  background-color: rgb(19, 60, 85);
   color: white;
+}
+
+/deep/ mat-spinner circle, .mat-spinner circle {
+  stroke: white !important;
 }
 
 @media only screen and (max-width: 880px) {
