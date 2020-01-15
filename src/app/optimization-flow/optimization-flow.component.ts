@@ -39,47 +39,12 @@ export class OptimizationFlowComponent implements OnInit {
   algoResponse: any;
   public endMessage = '';
   public endMessageDescription = '';
-  public folders: Section[] = [
-    {
-      name: 'Realitate virtuala',
-      type: 'Seminar',
-      reason: '',
-      initialDate: new Date('1/1/16'),
-      finalDate: new Date('1/1/16'),
-    },
-    {
-      name: 'Limbaje formale si tehnici de compilare',
-      type: 'Seminar',
-      reason: '',
-      initialDate: new Date('1/17/16'),
-      finalDate: new Date('1/17/16'),
-    },
-    {
-      name: 'Programare paralele si distribuita',
-      type: 'Laborator',
-      reason: '',
-      initialDate: new Date('1/28/16'),
-      finalDate: new Date('1/28/16'),
-    }
-  ];
-  notes: Section[] = [
-    {
-      name: 'Limbaje formale si tehnici de compilare',
-      type: 'Course',
-      reason: 'Courses cannot be moved',
-      initialDate: new Date('2/20/16'),
-      finalDate: new Date('2/20/16'),
-    },
-    {
-      name: 'Programare paralele si distribuita',
-      type: 'Course',
-      reason: 'Courses cannot be moved',
-      initialDate: new Date('1/18/16'),
-      finalDate: new Date('1/18/16'),
-    }
-  ];
+  diffs: any=[];
+
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
+  diffsAccepted: any=[];
+  diffsRejected: any=[];
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -155,7 +120,15 @@ export class OptimizationFlowComponent implements OnInit {
         this.http.get(`https://timetable.epixmobile.ro/schedule/algo/${username}/`).subscribe((response) => {
           this.algoDone = true;
           this.algoResponse = response;
-          console.log(this.algoResponse);
+          this.diffs=this.algoResponse['diffs'];
+          console.log(this.diffs);
+          this.diffs.forEach(diff=>{
+            if(diff.n_week!='null'){
+              this.diffsAccepted.push(diff);
+            }else{
+              this.diffsRejected.push(diff);
+            }
+          });
         });
       }
     );

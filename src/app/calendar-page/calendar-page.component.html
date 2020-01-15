@@ -56,7 +56,7 @@
           </mat-expansion-panel-header>
           <button mat-flat-button id="export-btn" (click)="download()">
             <img src="../../assets/img/export.png" style="height: 20px; width: 20px; margin: -3px 3px 0 -5px;">
-            XML
+            XLS
           </button>
         </mat-expansion-panel>
 
@@ -72,10 +72,6 @@
           </button>
           <button *ngIf="saveDone==false" class="nextBtn" mat-raised-button>
             <mat-spinner [diameter]="35" style="margin: 0 2.8rem 0 2.8rem"></mat-spinner>
-          </button>
-          <button mat-flat-button id="export-btn" style="margin: 0 0 10px 0">
-            <img src="../../assets/img/sync.png" style="height: 23px; width: 23px; margin: -3px 3px 0 -5px;">
-            Sync Google
           </button>
           <button *ngIf="resetDone==true" mat-flat-button id="export-btn" (click)="resetSchedule()">
             <img src="../../assets/img/opt.png" style="height: 23px; width: 23px; margin: -3px 3px 0 -5px;">

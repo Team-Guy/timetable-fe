@@ -36,7 +36,7 @@ export class CalendarPageComponent implements OnInit {
   public showQuickInfo = false;
   public scheduleHours: WorkHoursModel = { highlight: true, start: '08:00', end: '20:00' };
   public selectedDate: Date = new Date();
-  public weekNumber = this.computeWeek(this.selectedDate);
+  public weekNumber = this.computeWeek(this.selectedDate)-2;
   public eventSettings: EventSettingsModel = { dataSource: extend([], [], null, true) as object[] };
   public currentView: View = 'Week';
   public currentActivityType = 'Combined';
@@ -73,7 +73,7 @@ export class CalendarPageComponent implements OnInit {
     endTime.setTime(endTime.setHours(activity.start_time.split(':')[0] as number));
     endTime.setTime(endTime.getTime() + (activity.duration * 60 * 60 * 1000));
     if(type==='extra'){
-      rOnly=false;
+      rOnly=true;
     }
     return {
       Id: activityNo,

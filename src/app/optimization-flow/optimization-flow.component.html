@@ -138,21 +138,21 @@
         <div class="flex flex-col flex-vertical-center">
           <mat-list style="width: 80%;">
               <h3 mat-subheader>Changed</h3>
-              <mat-list-item *ngFor="let folder of folders">
+              <mat-list-item *ngFor="let d of diffsAccepted">
                 <mat-icon mat-list-icon>done_outline</mat-icon>
-                <p mat-line>{{folder.name}}</p>
-                <p mat-line> {{folder.type}} </p>
-                <p mat-line> From: <b>{{folder.initialDate | date}}</b> at <b>12am</b> <br>
-                  To: <b>{{folder.finalDate | date}}</b> at <b>14am</b> </p>
+                <p mat-line>{{d.title}}</p>
+                <p mat-line> {{d.type}} </p>
+                <p mat-line> From week <b>{{d.i_week}}</b>, day <b>{{d.i_day}}</b> at <b>{{d.i_hour}}</b> <br>
+                  To week <b>{{d.n_week}}</b>, day <b>{{d.n_day}}</b> at <b>{{d.n_hour}}</b> </p>
               </mat-list-item>
               <mat-divider></mat-divider>
               <h3 mat-subheader>Unable to satisfy your preferences</h3>
-              <mat-list-item *ngFor="let note of notes">
-                <mat-icon mat-list-icon>feedback</mat-icon>
-                <p style="float: left;" mat-line>{{note.name}}</p>
-                <p mat-line> {{note.type}} </p>
-                <p mat-line> {{note.initialDate | date}} </p>
-                <p mat-line> {{note.reason}} </p>
+              <mat-list-item *ngFor="let d of diffsRejected">
+                  <mat-icon mat-list-icon>cancel_presentation</mat-icon>
+                  <p mat-line>{{d.title}}</p>
+                  <p mat-line> {{d.type}} </p>
+                  <p mat-line> From week <b>{{d.i_week}}</b>, day <b>{{d.i_day}}</b> at <b>{{d.i_hour}}</b> <br>
+                  Reason: Unable to find a new time slot for this activity
               </mat-list-item>
           </mat-list>
         </div>
