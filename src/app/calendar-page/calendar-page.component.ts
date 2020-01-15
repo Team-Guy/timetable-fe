@@ -75,11 +75,16 @@ export class CalendarPageComponent implements OnInit {
     if(type==='extra'){
       rOnly=true;
     }
+
+    if(activity.type === undefined) {
+      activity.type = 'Personal';
+    }
+
     return {
       Id: activityNo,
       For: type,
       Subject: activity.title,
-      Location: activity.location,
+      Location: activity.location + ', ' + activity.type,
       StartTime: startTime,
       EndTime: endTime,
       Type: activity.type,
@@ -387,7 +392,7 @@ export class CalendarPageComponent implements OnInit {
     extras.forEach(extra=>{
       console.log(extra.StartTime.getDay());
       toSend.push({
-        priority:extra.PriorityType,
+        priority: 'HIGH',
         location:extra.Description,
         title:extra.Subject,
         desc:"extra activity",
