@@ -137,7 +137,7 @@
         <ng-template matStepLabel>Overview</ng-template>
         <div class="flex flex-col flex-vertical-center">
           <mat-list style="width: 80%;">
-              <h3 mat-subheader>Changed</h3>
+              <h3 mat-subheader>Moved to another time slot</h3>
               <mat-list-item *ngFor="let d of diffsAccepted">
                 <mat-icon mat-list-icon>done_outline</mat-icon>
                 <p mat-line>{{d.title}}</p>
@@ -152,6 +152,15 @@
                   <p mat-line>{{d.title}}</p>
                   <p mat-line> {{d.type}} </p>
                   <p mat-line> From week <b>{{d.i_week}}</b>, day <b>{{d.i_day}}</b> at <b>{{d.i_hour}}</b> <br>
+                  Reason: Unable to find a new time slot for this activity
+              </mat-list-item>
+              <mat-divider></mat-divider>
+              <h3 mat-subheader>Unchanged</h3>
+              <mat-list-item *ngFor="let d of diffsUnchanged">
+                <mat-icon mat-list-icon>error</mat-icon>
+                <p mat-line>{{d.title}}</p>
+                <p mat-line> {{d.type}} </p>
+                <p mat-line> From week <b>{{freq[d.frequency]}}</b>, day <b>{{d.day}}</b> at <b>{{d.start_time.hour}}</b> <br>
                   Reason: Unable to find a new time slot for this activity
               </mat-list-item>
           </mat-list>

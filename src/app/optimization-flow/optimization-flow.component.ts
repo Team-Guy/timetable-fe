@@ -40,11 +40,17 @@ export class OptimizationFlowComponent implements OnInit {
   public endMessage = '';
   public endMessageDescription = '';
   diffs: any=[];
+  freq={
+    "par":'2',
+    "impar":'1',
+    "full":'1, 2'
+  };
 
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   diffsAccepted: any=[];
   diffsRejected: any=[];
+  diffsUnchanged: any=[];
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -121,7 +127,7 @@ export class OptimizationFlowComponent implements OnInit {
           this.algoDone = true;
           this.algoResponse = response;
           this.diffs=this.algoResponse['diffs'];
-          console.log(this.diffs);
+          console.log(this.algoResponse);
           this.diffs.forEach(diff=>{
             if(diff.n_week!='null'){
               this.diffsAccepted.push(diff);
@@ -129,6 +135,11 @@ export class OptimizationFlowComponent implements OnInit {
               this.diffsRejected.push(diff);
             }
           });
+          for(let id of Object.keys(this.algoResponse['bypass']['school'])){
+            this.diffsUnchanged.push(this.algoResponse['bypass']['school'][id]);
+          }
+
+          console.log(this.diffsUnchanged);
         });
       }
     );

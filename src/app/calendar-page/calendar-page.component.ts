@@ -430,7 +430,7 @@ export class CalendarPageComponent implements OnInit {
         desc:"extra activity",
         day:weekDays[extra.StartTime.getDay()-1],
         frequency:freq[this.computeWeek(extra.StartTime)%2],
-        duration:extra.EndTime.getHours()-extra.StartTime.getHours(),
+        duration:Math.max(extra.EndTime.getHours()-extra.StartTime.getHours(),1),
         start_time:`${extra.StartTime.getHours()}:00:00`
       }
 
