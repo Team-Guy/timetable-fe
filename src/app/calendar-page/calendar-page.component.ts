@@ -31,13 +31,25 @@ import {CalendarService} from '../google/calendar.service';
   providers: [DayService, WeekService, WorkWeekService, MonthService, AgendaService, ResizeService, DragAndDropService],
 })
 export class CalendarPageComponent implements OnInit {
+
   @ViewChild('scheduleObj')
   public scheduleObj: ScheduleComponent;
   public showQuickInfo = false;
   public scheduleHours: WorkHoursModel = { highlight: true, start: '08:00', end: '20:00' };
   public selectedDate: Date = new Date();
-  public weekNumber = this.computeWeek(this.selectedDate)-2;
-  public eventSettings: EventSettingsModel = { dataSource: extend([], [], null, true) as object[] };
+  public weekNumber = this.computeWeek(this.selectedDate) - 2;
+  public eventSettings: EventSettingsModel = { dataSource: extend([], [], null, true) as object[],
+    fields : {
+      description: { name: 'Description', validation: {
+        required: true, minLength: [this.minValidation, 'That\'s short. We\'d like something more than 5 letters.']
+        }
+      },
+      subject: { name: 'Subject', validation: {
+        required: true, minLength: [this.minValidation, 'Give it a better name, something more than 5 letters.']
+        }
+      },
+    }
+  };
   public currentView: View = 'Week';
   public currentActivityType = 'Combined';
   public activityTypes = ['University', 'Personal', 'Combined']
@@ -59,6 +71,10 @@ export class CalendarPageComponent implements OnInit {
   saveDone=true;
   resetDone=true;
 
+  minValidation(args: { [key: string]: string }) {
+    return args['value'].length >= 5;
+  };
+
   userSubscription: Subscription;
   statusSubscription: Subscription;
 
@@ -73,11 +89,19 @@ export class CalendarPageComponent implements OnInit {
     endTime.setTime(endTime.setHours(activity.start_time.split(':')[0] as number));
     endTime.setTime(endTime.getTime() + (activity.duration * 60 * 60 * 1000));
     if(type==='extra'){
-      rOnly=true;
+      rOnly=false;
     }
 
-    if(activity.type === undefined) {
+    if(activity.type == null) {
       activity.type = 'Personal';
+    }
+
+    if(activity.title == null) {
+      activity.title = 'Personal activity';
+    }
+
+    if(activity.location == null) {
+      activity.location = 'Not specified';
     }
 
     return {
@@ -181,8 +205,7 @@ export class CalendarPageComponent implements OnInit {
             activity = this.generateActivityObject(activity, day, activitiesNo,'extra');
             personalActivities.push(activity);
           } else if(activity!=='Blocked by filter'){
-              if (activity.title !== personalActivities[personalActivities.length - 1].Subject ||
-              activity.type !== personalActivities[personalActivities.length - 1].Type) {
+              if (activity.title !== personalActivities[personalActivities.length - 1].Subject) {
                 activitiesNo += 1;
                 activity = this.generateActivityObject(activity, day, activitiesNo, 'extra');
                 personalActivities.push(activity);
@@ -235,7 +258,15 @@ export class CalendarPageComponent implements OnInit {
 
   setTimetableOnAllActivities() {
     let allActivities = this.getUniversityActicities();
-    allActivities=allActivities.concat(this.getPersonalActivities());
+    let sizeOfActivitiesGot = allActivities.length;
+    let personalActivities = this.getPersonalActivities();
+    personalActivities.forEach((activity) => {
+      activity.Id = sizeOfActivitiesGot + 1;
+      sizeOfActivitiesGot += 1;
+    });
+    console.log(allActivities);
+    allActivities = allActivities.concat(personalActivities);
+    console.log(allActivities);
     this.scheduleObj.eventSettings.dataSource = extend([], allActivities, null, true) as object[];
   }
 
@@ -384,6 +415,7 @@ export class CalendarPageComponent implements OnInit {
     this.scheduleObj.eventsData.forEach(event=>{
       if(this.checkExtra(event)){
         extras.push({...event});
+        console.log('event: ', {...event});
       }
     });
 
@@ -391,7 +423,7 @@ export class CalendarPageComponent implements OnInit {
     const toSend=[];
     extras.forEach(extra=>{
       console.log(extra.StartTime.getDay());
-      toSend.push({
+      let activity = {
         priority: 'HIGH',
         location:extra.Description,
         title:extra.Subject,
@@ -400,25 +432,35 @@ export class CalendarPageComponent implements OnInit {
         frequency:freq[this.computeWeek(extra.StartTime)%2],
         duration:extra.EndTime.getHours()-extra.StartTime.getHours(),
         start_time:`${extra.StartTime.getHours()}:00:00`
-      });
+      }
+
+      if(activity.title == null) {
+        activity.title = 'Personal activity';
+      }
+
+      if(activity.location == null) {
+        activity.location = 'Not specified';
+      }
+
+      toSend.push(activity);
     });
 
     console.log(toSend);
 
     const username = this.user.email.split('@')[0];
-    const post=this.http.post(`https://timetable.epixmobile.ro/schedule/save_extra/${username}`,toSend).toPromise();
-    post.then(result=>{
-      console.log(result);
+    const post = this.http.post(`https://timetable.epixmobile.ro/schedule/save_extra/${username}`, toSend).toPromise();
+    post.then(result => {
+      console.log('result: ', result);
       this.getRAWtimetable();
       this.currentActivityType = 'Combined';
-      this.saveDone=true;
-    })
+      this.saveDone = true;
+    });
   }
 
    checkExtra(event: Object) {
-    if(Object.keys(event).filter(k=>k=='For').length!=1)
+    if (Object.keys(event).filter( k => k == 'For' ).length != 1) {
       return true;
+    }
     return event["For"] == 'extra';
-
   }
 }
